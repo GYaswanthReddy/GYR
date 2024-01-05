@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="/static/styles/shipment.css">
+    <script src="/static/JS/shipment.js"></script>
+</head>
+<body>
+    <div class="body">
+        <div class="container">
+            <div class="top">
+                <div class="img">
+                    <img src="/static/images/scmimg.jpg" alt="">
+                    
+                </div>
+                <div class="title">
+                    <span>SCMXpert</span>
+                </div>
+            </div>
+            <div class="sidebar" id="sidebar">
+                <ul>
+                    <li>
+                        <a href="/dashboard">
+                            <span class="bx bxs-dashboard icon"></span>
+                            <span class="title">Dashboard</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/account">
+                            <span class="bx bx-user-circle icon"></span>
+                            <span class="title">My Account</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/newshipment">
+                            <span class="bx bx-detail icon"></span>
+                            <span class="title">New Shipment</span>
+                        </a>
+                    </li>
+                    <li class="active">
+                        <a href="/shipmenth">
+                            <span class="bx bxs-truck icon"></span>
+                            <span class="title">My shipment</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/datastream">
+                            <span class="bx bx-data icon"></span>
+                            <span class="title">Device Data</span>
+                        </a>
+                    </li>
+                    <li class="logout">
+                        <a href="/login">
+                            <span class="bx bx-log-out icon"></span>
+                            <span class="title">Logout</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="mainbody">
+            <div class="header">
+                <i class="bx bx-menu menu-icon" onclick="toggleSidebar() "></i>
+                <span class="user-text">My Shipment</span>
+                <a href="#">
+                    <i class="bx bx-user-circle icon"></i>
+                </a>
+            </div>
+            <div class="detail">
+                <div class="table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Shipment Number</th>
+                                <th>Container Number</th>
+                                <th>Route Details</th>
+                                <th>Goods Type</th>
+                                <th>Device</th>
+                                <th>Expected Delivery Date</th>
+                                <th>PO Number</th>
+                                <th>Delivery Number</th>
+                                <th>NDC Number</th>
+                                <th>Batch Id</th>
+                                <th>Serial number of Goods</th>
+                                <th>Shipment Description</th>
+                            </tr>
+                            {% for data in shipment %}
+                            <tr>
+                                <td>{{data.shipment_number}}</td>
+                                <td>{{data.container_number}}</td>
+                                <td>{{data.route_details}}</td>
+                                <td>{{data.goods_type}}</td>
+                                <td>{{data.device}}</td>
+                                <td>{{data.delivery_date}}</td>
+                                <td>{{data.po_number}}</td>
+                                <td>{{data.delivery_number}}</td>
+                                <td>{{data.ndc_number}}</td>
+                                <td>{{data.batch_id}}</td>
+                                <td>{{data.serial_number}}</td>
+                                <td>{{data.shipment_description}}</td>
+                            </tr>
+                            {%endfor%}
+                        </thead>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MyAccount</title>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="/static/styles/account.css">
+
+</head>
+<body>
+    <div class="body">
+        <div class="container">
+            <div class="top">
+                <div class="img">
+                    <img src="/static/images/scmimg.jpg" alt="">
+                    
+                </div>
+                <div class="title">
+                    <span>SCMXpert</span>
+                </div>
+            </div>
+            <div class="sidebar" id="sidebar">
+                <ul>
+                    <li>
+                        <a href="/dashboard">
+                            <span class="bx bxs-dashboard icon"></span>
+                            <span class="title">Dashboard</span>
+                        </a>
+                    </li>
+                    <li class="active">
+                        <a href="/account" onclick="ok('/account')">
+                            <span class="bx bx-user-circle icon"></span>
+                            <span class="title">My Account</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/newshipment">
+                            <span class="bx bx-detail icon"></span>
+                            <span class="title">New Shipment</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/shipment">
+                            <span class="bx bxs-truck icon"></span>
+                            <span class="title">My shipment</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/datastream">
+                            <span class="bx bx-data icon"></span>
+                            <span class="title">Device Data</span>
+                        </a>
+                    </li>
+                    <li class="logout">
+                        <a href="/login">
+                            <span class="bx bx-log-out icon"></span>
+                            <span class="title">Logout</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="mainbody">
+            <div class="header">
+                <i class="bx bx-menu menu-icon" onclick="toggleSidebar() "></i>
+                <span class="user-text">My Account</span>
+                <a href="#" class="user-account">
+                    <i class="bx bx-user-circle icon" onclick="open()"></i>
+                </a>
+            </div>
+            <div class="detail">
+                <div class="account">
+                    <i class="bx bx-user-circle"></i>
+                    <div class="user">
+                        <h3>Username: {{user_data["username"]}} </h3>
+                        <h3>Email:</h3>
+                        <h3>Address:</h3>
+                        <h3>User:</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="/static/JS/account.js"></script>
+</body>
+</html>

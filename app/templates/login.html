@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/styles/login.css">
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+
+    <title>Login</title>
+</head>
+<body>
+    <div class="container">
+        <div class="login">
+              <form action="/login" method="post" id="loginForm" class="login-input">
+                <h2 class="title">Login</h2>
+                <div class="input-container">
+                    <i class="bx bxs-envelope"></i>
+                    <input type="text" name="email" id="email" placeholder="Enter email" onfocus="this.placeholder=''" onblur="this.placeholder='Enter email'" required autocomplete="email">
+                </div>
+                <div class="input-container">
+                    <i class="bx bxs-lock-alt"></i>
+                    <input type="password" name="password" id="password" placeholder="Enter password" onfocus="this.placeholder=''" onblur="this.placeholder='Enter password'" onclick="visible('icon', 'password')" required autocomplete="password">
+                    <i class="bx bxs-low-vision password-icon" id="icon" onclick="togglePasswordVisibility('password', 'icon')"></i>
+                </div>
+                <div class="g-recaptcha" data-sitekey="6LfPTTcpAAAAACv-ko88IrY1J5csGFtPhmcYx9mf"></div>
+                <input type="submit" id="submit" value="Login" class="submit" onclick="ok()">
+                <h5>Don't Have an Account? <a href='#' id="register-link">Register</a></h5>
+              </form>
+              <form action="/register" method="post" class="register-input">
+                <h2>Register</h2>
+                <div class="input-container">
+                    <i class="bx bxs-user-circle"></i>
+                    <input type="text" name="username" id="username" placeholder="Enter your username"  onfocus="this.placeholder=''" onblur="this.placeholder='Enter username'" required autocomplete="username">
+                </div>
+                <div class="input-container">
+                    <i class="bx bxs-envelope"></i>
+                    <input type="email" name="email" id="register-email" placeholder="Enter your email"  onfocus="this.placeholder=''" onblur="this.placeholder='Enter your email'" required autocomplete="email">
+                </div>
+                <div class="input-container">
+                    <i class="bx bxs-lock-alt "></i>
+                    <input type="password" name="new_password" id="new_password" placeholder="New password" onfocus="this.placeholder=''" onblur="this.placeholder='New password'" onclick="visible('icon1', 'new_password')" required autocomplete="new-password">
+                    <i class="bx bxs-low-vision password-icon" id="icon1" onclick="togglePasswordVisibility('new_password', 'icon1')"></i>
+                </div>
+                <div class="input-container">
+                    <i class="bx bxs-lock-alt"></i>
+                    <input type="password" name="confirm_password" id="confirm_password" placeholder="Confirm password" onfocus="this.placeholder=''" onblur="this.placeholder='Confirm password'" onclick="visible('icon2', 'confirm_password')" required autocomplete="new-password">
+                    <i class="bx bxs-low-vision password-icon" id="icon2" onclick="togglePasswordVisibility('confirm_password', 'icon2')"></i>
+                </div>
+                <input type="submit" value="Register" class="submit ">
+                <h5>Have an Account! <a href='#'  id="login-link" >Login</a></h5>
+            </form>
+        </div>
+        <div class="text-panel">
+            <div class="panel panel-left">
+                <div class="text">
+                    <h2>SCMXPERTLITE</h2>
+                    <p>SCMXpert’s global solutions track the quality, Integrity, and Security of Cargo at every stage of the journey. Our best of breed products, global command & control center and value-added services help our customers safeguard their products no matter their industry or location. We work with our customers to align with their bottomline while providing innovative solutions.</p>
+                </div>
+                <!-- <img src="/app/static/images/transportation-logistics-container-cargo-ship-cargo-plane-3d-rendering-illustration-scaled.jpg" alt=""> -->
+            </div>
+            <div class="panel panel-right">
+                <div class="text">
+                    <h2>SCMXPERTLITE</h2>
+                    <p>SCMXpert’s global solutions track the quality, Integrity, and Security of Cargo at every stage of the journey. Our best of breed products, global command & control center and value-added services help our customers safeguard their products no matter their industry or location. We work with our customers to align with their bottomline while providing innovative solutions.</p>
+                </div>
+                <!-- <img src="/app/static/images/transportation-logistics-container-cargo-ship-cargo-plane-3d-rendering-illustration-scaled.jpg" alt="" class="image"> -->
+            </div>
+        </div>
+    </div>
+    <script src="/static/JS/login.js"></script>
+    <div id="token_data" style="display: none;">{{ access_token }}</div>
+</body>
+</html>
