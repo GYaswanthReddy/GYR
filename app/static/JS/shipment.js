@@ -52,57 +52,7 @@ document.addEventListener('DOMContentLoaded', function () {
       toggleSidebar();
     });
   });
-  
-
-// jwt token retrieval
-// $(document).ready(function(){ 
-//   // Prevent the default action (navigation to the specified URL)
-
-
-//   // Now, you can add your custom logic
-//   console.log(sessionStorage.getItem("email"));
-//   const email = sessionStorage.getItem("email");
-//   const token = localStorage.getItem("access_token");
-//   fetch(`/shipment`, {
-//     method : "GET",
-//     headers : {
-//       "Authorization": localStorage.getItem("access_token"),
-//       'Content-Type': 'application/json',
-//     }
-//   }).then(response => {
-//     if (response.status !== 200) {
-//       throw new Error(`Status ${response.status}`);
-//     }
-//     console.log(response.json());
-//     return response.json();
-//   }).then(data => {
-//     console.log(data);
-//     let shipment_data = "";
-//     for (let shipment_no = 0; shipment_no < data.length; shipment_no++) {
-//         const shipment = data[shipment_no];
-
-//         shipment_data = shipment_data + "<tr><td>" 
-//         + shipment.shipment_number + "</td><td>"
-//         + shipment.container_number + "</td><td>"
-//         + shipment.route_details + "</td><td>"
-//         + shipment.goods_type + "</td><td>"
-//         + shipment.device + "</td><td>"
-//         + shipment.delivery_date + "</td><td>"
-//         + shipment.po_number + "</td><td>"
-//         + shipment.ndc_number + "</td><td>"
-//         + shipment.batch_id + "</td><td>"
-//         + shipment.serial_number + "</td><td>"
-//         + shipment.shipment_description + "</td></tr>"
-//     }
-//     console.log(shipment_data);
-//     $("#table_data").html(shipment_data);
-//     console.log(data);
-//   }).catch(error => {
-//     console.log("data hasn't pushed to html");
-//   })
-// });
-
-
+// jwt retrieval
 $(document).ready(function(){
   const token = localStorage.getItem("access_token");
   fetch(`/shipmentdata`,{
