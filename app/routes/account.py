@@ -25,11 +25,11 @@ def account(request : Request, token : dict = Depends(oauth2_schema)):
     print(token,"account")
     user_data = get_current_user(token["access"])
     print(user_data["username"])
-    return templates.TemplateResponse("account.html", {"request":request,"user_data":user_data})
+    return {"user_data":user_data}
 
 
 
 @route.get("/account")
-def account(request : Request, current_user : str = get_users):
-    print(current_user, "user_Data")
+def account(request : Request):
+    # print(current_user, "user_Data")
     return templates.TemplateResponse("account.html", {"request":request})

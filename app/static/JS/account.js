@@ -1,3 +1,17 @@
+// checking for username in session
+if(sessionStorage.getItem("username") == null)
+{
+  window.location.href = "/login";
+}
+
+$(document).ready(function(){
+  console.log("working");
+  $("#username").text(`Username: ${sessionStorage.getItem("username")}`);
+  $("#email").text(`Email: ${sessionStorage.getItem("email")}`);
+  $("#role").text(`User: ${sessionStorage.getItem("role")}`);
+});
+
+
 document.addEventListener('DOMContentLoaded', function () {
     function toggleSidebar() {
       var body = document.querySelector('body');
@@ -52,26 +66,31 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
 // jwt token 
-function ok(urlpara) {
-  var token = {"access" : localStorage.getItem("access_token")};
-  var url = urlpara;
-  console.log(url, " this is url")
-  if (token) {
-    fetch(`http://127.0.0.1:8000${urlpara}`, {
-      method : "POST",
-      headers : {
-        "Content-Type" : "application/json",
-      },
-      body:  JSON.stringify(token),
-    });
-    console.log(token);
-  }
-  else { 
-    console.log("token not found");
-  }
-  }
+
+  // var token = {"access" : localStorage.getItem("access_token")};
+  // var url = urlpara;
+  // console.log(url, " this is url")
+  // if (token) {
+  //   fetch(`/account`, {
+  //     method : "GET",
+  //     headers : {
+  //       "Content-Type" : "application/json",
+  //     },
+  //     body:  JSON.stringify(token),
+  //   })
+  //   .then(response => response.json())
+  //   .then(data)
+  //   console.log(data)
+  //   var name = document.getElementById("username");
+  //   name.innerText += data.username;
+  // }
+  // else { 
+  //   console.log("token not found");
+  // }
+  
 
 // jwt token delete
 function logout() {
-  localStorage.clear('access_token')
+  localStorage.clear('access_token');
+  sessionStorage.clear();
 }

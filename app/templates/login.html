@@ -6,13 +6,14 @@
     <link rel="stylesheet" href="/static/styles/login.css">
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <script src="https://code.jquery.com/jquery-3.7.1.slim.js" integrity="sha256-UgvvN8vBkgO0luPSUl2s8TIlOSYRoGFAX4jlCIm9Adc=" crossorigin="anonymous"></script>
 
     <title>Login</title>
 </head>
 <body>
     <div class="container">
         <div class="login">
-              <form action="/login" method="post" id="loginForm" class="login-input">
+              <form id="loginForm" class="login-input">
                 <h2 class="title">Login</h2>
                 <div class="input-container">
                     <i class="bx bxs-envelope"></i>
@@ -24,7 +25,9 @@
                     <i class="bx bxs-low-vision password-icon" id="icon" onclick="togglePasswordVisibility('password', 'icon')"></i>
                 </div>
                 <div class="g-recaptcha" data-sitekey="6LfPTTcpAAAAACv-ko88IrY1J5csGFtPhmcYx9mf"></div>
-                <input type="submit" id="submit" value="Login" class="submit" onclick="ok()">
+                <span id="error-message" class="error-message"></span>
+                <a href="/forgotpassword" id="forgot-password-link">Forgot Password?</a>
+                <input type="submit" id="submit-login" value="Login" class="submit">
                 <h5>Don't Have an Account? <a href='#' id="register-link">Register</a></h5>
               </form>
               <form action="/register" method="post" class="register-input">
@@ -47,7 +50,7 @@
                     <input type="password" name="confirm_password" id="confirm_password" placeholder="Confirm password" onfocus="this.placeholder=''" onblur="this.placeholder='Confirm password'" onclick="visible('icon2', 'confirm_password')" required autocomplete="new-password">
                     <i class="bx bxs-low-vision password-icon" id="icon2" onclick="togglePasswordVisibility('confirm_password', 'icon2')"></i>
                 </div>
-                <input type="submit" value="Register" class="submit ">
+                <input type="submit" value="Register" class="submit">
                 <h5>Have an Account! <a href='#'  id="login-link" >Login</a></h5>
             </form>
         </div>
@@ -69,6 +72,6 @@
         </div>
     </div>
     <script src="/static/JS/login.js"></script>
-    <div id="token_data" style="display: none;">{{ access_token }}</div>
+    
 </body>
 </html>

@@ -1,4 +1,7 @@
 // Functionality for login transition
+$(document).ready(function(){
+    $("#error-message").css("visibility", "hidden");
+  });
 const login_btn = document.querySelector("#login-link");
 const register_btn = document.querySelector("#register-link");
 const container = document.querySelector(".container");
@@ -51,16 +54,49 @@ document.addEventListener('click', function (event) {
 
 
 // jwt token storing in localstorage
-document.addEventListener("DOMContentLoaded", function() {
-    const token = document.getElementById("token_data");
-    const access_token = token.textContent;
-    console.log(access_token,"this is const");
-    localStorage.setItem("access_token", access_token);
-    if (access_token) {
-        const newToken = access_token;
-        window.location.href = `/dashboard/${newToken}`;
-    }
+
+document.getElementById('submit-login').addEventListener('click', function(event) {
+    // Prevent the default action (navigation to the specified URL)
+    event.preventDefault();
+
+    // Now, you can add your custom logic
+    console.log($("#email").val())
+    console.log($("#password").val())
+    const formData = new FormData();
+    formData.append("email", $("#email").val());
+    formData.append("password", $("#password").val());
+    fetch("/login", {
+        method: "POST",
+        body: formData
+    })
+    .then(response => {
+        if(response.status === 200)
+        {
+            return response.json();
+        }
+        else
+        {
+            throw new Error("User Not Found or Invalid Credentials");
+        }
+    })
+    .then(response => {
+        console.log(`${response.role}`);
+        localStorage.setItem("access_token", `${response.access_token}`);
+        sessionStorage.setItem("username", `${response.username}`);
+        sessionStorage.setItem("email", `${response.email}`);
+        if (response.role !== null) {
+            sessionStorage.setItem("role", `${response.role}`);
+        }
+        if (localStorage.getItem("access_token") !== null) {
+            window.location.href= "/dashboard";
+        }
+        else {
+            throw new Error("Unexpected response format");
+        }
+    })
+    .catch(error => {
+        $("#error-message").text(error.message);
+        $("#error-message").css("visibility", "visible");
+    })
+
 });
-
-
-

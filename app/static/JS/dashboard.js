@@ -1,3 +1,9 @@
+// checking for username in session
+if(sessionStorage.getItem("username") == null)
+{
+  window.location.href = "/login";
+}
+
 document.addEventListener('DOMContentLoaded', function () {
   function toggleSidebar() {
     var body = document.querySelector('body');
@@ -81,7 +87,7 @@ var token = {"access" : localStorage.getItem("access_token")};
 var url = urlpara;
 console.log(url, " this is url")
 if (token) {
-  fetch(`http://127.0.0.1:8000${urlpara}`, {
+  fetch(`http://127.0.0.1:8000/${urlpara}`, {
     method : "POST",
     headers : {
       "Content-Type" : "application/json",
@@ -101,6 +107,7 @@ else {
 
 // jwt token delete
 function logout() {
-  localStorage.clear('access_token')
+  localStorage.clear();
+  sessionStorage.clear();
 }
 

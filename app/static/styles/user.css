@@ -9,9 +9,9 @@
 
 body {
     font-family: 'Poppins', sans-serif;
-    background: url(/static/images/newship.jpg);
+    background: url(/static/images/wp9448982.jpg);
     background-size:cover;
-    backdrop-filter: blur(5px);
+    backdrop-filter: blur(3px);
 }
 /* Side bar Styles */
 .body {
@@ -28,7 +28,6 @@ body {
     border-radius: 5px;
     backdrop-filter: blur(2px);
 }
-
 
 .container .top {
     display: flex;
@@ -90,7 +89,7 @@ body {
 
 .sidebar .logout {
     position: relative;
-    top: 420px;
+    top: 350px;
 }
 
 .sidebar .logout .icon,
@@ -110,13 +109,12 @@ body {
 
 .body .mainbody .header {
     display: flex;
-    color: white;
     flex-direction: row;
     padding-left: 10px;
     height: 85px;
-    background: white;
+    background: rgba(255, 255, 255, 0.1);
     width: 100%;
-    background: rgba(255,255,255,0.1);
+    color: white;
 }
 
 .body .mainbody .header .menu-icon {
@@ -133,16 +131,16 @@ body {
 
 .body .mainbody .header .user-text {
     position: absolute;
-    left: 20%;
-    top: 15px;
+    left: 25%;
+    top: 20px;
     font-size: 30px;
 }
 
 .body .mainbody .header .icon {
     position: absolute;
     right: 25px;
-    top: 20px;
-    font-size: 40px;
+    top: 22px;
+    font-size: 49px;
     color: white;
 }
 .body .mainbody .header a:hover,
@@ -235,63 +233,125 @@ body.minimized .sidebar ul li .icon {
     margin-right: 10px; 
 }
 
-
-/* Detail styles */
-.form {
+.detail {
     position: fixed;
-    width: 910px;
-    height: 780px;
-    border-radius: 15px;
-    background: linear-gradient(#69a3ec,#fae0d8,#07436f);
+    width: 900px;
+    height: 700px;
+    /* background-color: white; */
     top: 15%;
-    left: 25%;
-    padding: 60px 0 0 30px;
-    box-shadow: 0 0 50px rgb(254,253,238);
+    left: 30%;
 }
 
-.div1, .div2, .div3, .div4, .div5, .div6 {
-    height: 100px;
-    display: flex;
-    flex-direction: row; 
-    
-}
-#error-message {
-    color: red;
-}
-
-.div1 .left, 
-.div2 .left, 
-.div3 .left, 
-.div4 .left, 
-.div5 .left, 
-.div6 .left {
-    width: 450px;
+.detail .top {
+    position: absolute;
+    top: 20px;
+    width: 100%;
+    height: 170px;
+    text-align: center;
+    color: white;
 }
 
-
-.div1 .right:hover, 
-.div2 .right:hover, 
-.div3 .right:hover, 
-.div4 .right:hover, 
-.div5 .right:hover, 
-.div6 .right:hover,
-.div1 .left:hover, 
-.div2 .left:hover, 
-.div3 .left:hover, 
-.div4 .left:hover, 
-.div5 .left:hover, 
-.div6 .left:hover {
-    transform: scale(1.05);
-    transition: 0.1s ease, transform 0.4s ease;
+.detail .top .device-search {
+    position: fixed;
+    left: 33%;
+    top: 25%;
 }
 
-input[type="text"],input[type="number"], input[type="date"], select {
-    font-size: 15px;
-    width: 400px;
+.device-search label {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.device-search select {
+    width: 350px;
+    height: 40px;
+    border-radius: 5px;
+    padding: 10px;
+}
+
+.top input[type=submit] {
+    position: fixed;
+    top: 28%;
+    left: 63%;
+    width: 180px;
     height: 40px;
     border-radius: 10px;
-    padding: 0 20px 0 20px;
-    border: 1px solid rgb(190, 189, 189);
+    background: #0537f9;
+    color: white;
+    border: 1px solid;
+}
+
+.top input[type=submit]:hover, .device-search select:hover {
+    cursor: pointer;
+}
+
+.bottom {
+    position: absolute;
+    top: 35%;
+    left: 1%;
+    background: white;
+    width: 900px;
+    height: 500px;
+    overflow-y: auto;
+    border-radius: 10px;
+}
+
+table {
+    padding: 20px;
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th {
+    background-color:#6759c2;
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    color: white;
+}
+th, td {
+    padding: 20px 15px;
+    text-align: center;
+}
+
+tr {
+    border-bottom: 1px solid #dddddd;
+    border-collapse: collapse;
+}
+
+tr:hover{ 
+    
+    background: #f3f3f3;
+    transform: scale(1.02);
+    transition: transform 0.2s ease, scale 0.2s ease;
+}
+
+tr:nth-of-type(even) {
+    background-color: #dad7d7;
+}
+ tr:last-of-type {
+    border-bottom: 1px solid rgba(0,89,175,255);
+}
+
+.admin {
+    position: absolute;
+    text-align: center;
+    top:40%;
+    left: 40%;
+    font-size: 40px;
+    color: white;
+
+}
+
+.form {
+    position: absolute;
+    top: 25%;
+    left: 35%;
+    width: 500px;
+    height: 300px;
+    background:white;
+    padding: 35px 25px 15px 40px;
+    border-radius: 20px;
 }
 
 label {
@@ -300,28 +360,23 @@ label {
     font-weight: bolder;
 }
 
-.clear, .submit {
+input, select {
+    font-size: 15px;
+    width: 400px;
+    height: 40px;
+    margin-bottom: 25px;
+    border-radius: 10px;
+    padding: 0 20px 0 20px;
+    border: 1px solid rgb(190, 189, 189);
+}
+#submit {
     margin-top: 20px;
     position: absolute;
     width: 120px;
     height: 35px;
     border: 1px solid rgb(190, 189, 189);
     border-radius: 20px;
-}
-
-.clear:hover, .submit:hover {
-    cursor: pointer;
-    transform: scale(1.1);
-    transition: 0.2s ease, transform 0.4s ease;
-}
-.submit {
-    position: absolute;
-    right: 30px;
     background: #0082e6;
     color: white;
-}
-
-.clear {
-    background: rgba(243, 18, 18, 0.822);
-    color: white;
+    left: 35%;
 }

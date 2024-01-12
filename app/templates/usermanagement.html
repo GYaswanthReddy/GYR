@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard</title>
+    <title>Document</title>
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-    <link rel="stylesheet" href="/static/styles/datastream.css">
+    <link rel="stylesheet" href="/static/styles/user.css">
     <script src="https://code.jquery.com/jquery-3.7.1.slim.js" integrity="sha256-UgvvN8vBkgO0luPSUl2s8TIlOSYRoGFAX4jlCIm9Adc=" crossorigin="anonymous"></script>
-    <script src="../static/JS/datastream.js"></script>
+    <script src="/static/JS/user.js"></script>
 </head>
 <body>
     <div class="body">
@@ -47,15 +47,15 @@
                             <span class="title">My shipment</span>
                         </a>
                     </li>
-                    <li class="active">
+                    <li >
                         <a href="/datastream">
                             <span class="bx bx-data icon"></span>
                             <span class="title">Device Data</span>
                         </a>
                     </li>
-                    <li id="user_manage">
+                    <li class="active">
                         <a href="/usermanagement">
-                            <span class="bx bx-user-circle icon"></span>
+                            <span class="bx bx-data icon"></span>
                             <span class="title">User Manage</span>
                         </a>
                     </li>
@@ -71,47 +71,21 @@
         <div class="mainbody">
             <div class="header">
                 <i class="bx bx-menu menu-icon" onclick="toggleSidebar() "></i>
-                <span class="user-text">Device Data Stream</span>
+                <span class="user-text">User Management</span>
                 <a href="/account">
                     <i class="bx bx-user-circle icon"></i>
                 </a>
             </div>
-            <div id="detail" class="detail">
-                <div class="top">
-                    <h2>Please Select a Device Id to See the Data Stream</h2>
-                    <div class="device-search">
-                        <label for="device_id">Device Id<i class="danger-text" style="color: red;">*</i></label><br>
-                        <select name="device_id" id="device_id">
-                            <option value="Select Device">Select Device</option>
-                            <option value="device1">device1</option>
-                            <option value="device2">device2</option>
-                        </select>
-                    </div>
-                    <input type="submit" value="Get Device Data">
-                </div>
-                <div class="bottom">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Device Id</th>
-                                <th> Battery Level</th>
-                                <th>First Sensor Temperature</th>
-                                <th>Route From</th>
-                                <th>Route To</th>
-                                <th>Timestamp</th>
-                            </tr>
-                        </thead>
-                        <tbody id="table_body">
-
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-            <div id="admin" class="admin">
-                <p>
-                    404 Not Found
-                </p><br>
-                <p>Required Admin Privileges</p>
+            <div id="form" class="form">
+                <form >
+                    <label for="email">Email:</label><br>
+                    <input type="text" id="email" placeholder="Enter Email" name="email"><br>
+                    <label for="email">Role:</label><br>
+                    <select name="role" id="role" required>
+                        <option value="admin" selected>Admin</option>
+                    </select><br>
+                    <input type="submit" id="submit" name="submit">
+                </form>
             </div>
         </div>
     </div>

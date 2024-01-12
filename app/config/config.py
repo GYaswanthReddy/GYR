@@ -9,3 +9,4 @@ DB = Client["yash"]
 REGISTER_COL = DB["USERS"]
 
 SHIPMENT = DB["SHIPMENT_DATA"]
+

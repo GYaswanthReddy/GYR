@@ -6,7 +6,8 @@
     <title>Dashboard</title>
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="/static/styles/shipment.css">
-    <script src="/static/JS/shipment.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.slim.js" integrity="sha256-UgvvN8vBkgO0luPSUl2s8TIlOSYRoGFAX4jlCIm9Adc=" crossorigin="anonymous"></script>
+    <script src="../static/JS/shipment.js"></script>
 </head>
 <body>
     <div class="body">
@@ -41,7 +42,7 @@
                         </a>
                     </li>
                     <li class="active">
-                        <a href="/shipmenth">
+                        <a href="/shipment">
                             <span class="bx bxs-truck icon"></span>
                             <span class="title">My shipment</span>
                         </a>
@@ -53,7 +54,7 @@
                         </a>
                     </li>
                     <li class="logout">
-                        <a href="/login">
+                        <a href="/login" onclick="logout()">
                             <span class="bx bx-log-out icon"></span>
                             <span class="title">Logout</span>
                         </a>
@@ -65,7 +66,7 @@
             <div class="header">
                 <i class="bx bx-menu menu-icon" onclick="toggleSidebar() "></i>
                 <span class="user-text">My Shipment</span>
-                <a href="#">
+                <a href="/account">
                     <i class="bx bx-user-circle icon"></i>
                 </a>
             </div>
@@ -87,23 +88,9 @@
                                 <th>Serial number of Goods</th>
                                 <th>Shipment Description</th>
                             </tr>
-                            {% for data in shipment %}
-                            <tr>
-                                <td>{{data.shipment_number}}</td>
-                                <td>{{data.container_number}}</td>
-                                <td>{{data.route_details}}</td>
-                                <td>{{data.goods_type}}</td>
-                                <td>{{data.device}}</td>
-                                <td>{{data.delivery_date}}</td>
-                                <td>{{data.po_number}}</td>
-                                <td>{{data.delivery_number}}</td>
-                                <td>{{data.ndc_number}}</td>
-                                <td>{{data.batch_id}}</td>
-                                <td>{{data.serial_number}}</td>
-                                <td>{{data.shipment_description}}</td>
-                            </tr>
-                            {%endfor%}
                         </thead>
+                        <tbody id="table_data">
+                        </tbody>
                     </table>
                 </div>
             </div>

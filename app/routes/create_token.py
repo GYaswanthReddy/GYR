@@ -2,8 +2,8 @@ from passlib.context import CryptContext
 from pydantic import BaseModel
 from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
 import datetime
-from jose import JWTError, jwt
-from fastapi import Depends, HTTPException
+from jose import jwt
+from fastapi import Depends
 from config.config import *
 
 
@@ -14,7 +14,7 @@ token_expire = datetime.datetime.utcnow() + datetime.timedelta(minutes=60)
 
 pwd_encode = CryptContext(schemes=["bcrypt"], deprecated = "auto")
 
-oauth2_scheme = OAuth2PasswordBearer(tokenUrl = 'token')
+oauth2_scheme = OAuth2PasswordBearer(tokenUrl = 'login')
 
 
 class Token(BaseModel):
@@ -41,10 +41,12 @@ def authenticate_user(email : str, password : str = None, form_data : OAuth2Pass
         password = form_data.password
     
     user = get_user(email)
-    User(email = email, username = user["username"])
-    if not user and not verify_password(password, user["password"]):
-        return None
-    return user
+    # User(email = email, username = user["username"])
+    # print("test.....", verify_password(password, user["password"]))
+    # print(not user)
+    if user and verify_password(password, user["password"]):
+        return user
+    return None
 
 
 def create_access_token(user_data : dict):
@@ -56,12 +58,15 @@ def create_access_token(user_data : dict):
 
 
 def get_current_user(token: str = Depends(oauth2_scheme)):
-    print(token,"heloo")
+    #print(token,"get_user")
+    if not token:
+        return False
+    #print(token,"im in get_current_user")
     payload = jwt.decode(token, secret_key, algorithms=[algorithm])
     email = payload.get('sub')
-    print(email)
+    #print(email,"im in get_current")
     user = get_user(email)
-    print(user)
+    #print(user, "im in get_current")
     if user:
         return user
     return None

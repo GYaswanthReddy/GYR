@@ -1,3 +1,19 @@
+// checking for username in session
+$(document).ready(function() {
+  if (sessionStorage.getItem("role") === "admin") {
+    $("#admin").css("visibility", "hidden");
+    $("#detail").css("visibility", "visible");
+    $("#user_manage").css("visibility", "visible");
+}
+});
+
+// checking for username in session
+if(sessionStorage.getItem("username") == null)
+{
+  window.location.href = "/login";
+}
+
+
 document.addEventListener('DOMContentLoaded', function () {
     function toggleSidebar() {
       var body = document.querySelector('body');
@@ -47,20 +63,20 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   });
 
-  // jwt token retrieval
-const accessToken = localStorage.getItem("access_token");
-console.log(accessToken);
-fetch('/datastream', {
-  method : "GET",
-  headers : {
-    'Authorization' : `Bearer ${accessToken}`,
-    'Content-Type': 'application/json',
-  },
-}) 
-.catch(error => console.error('Error:', error));
+// display error msg for users
+  $(document).ready(function() {
+    if (sessionStorage.getItem("role") === "user") {
+      $("#detail").css("visibility", "hidden");
+      $("#user_manage").css("visibility", "hidden");
+      $("#admin").css("visibility", "visible");
+    }
+  });
+
+
 
 
 // jwt token delete
 function logout() {
-  localStorage.clear('access_token')
+  localStorage.clear('access_token');
+  sessionStorage.clear();
 }

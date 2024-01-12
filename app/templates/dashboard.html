@@ -6,7 +6,8 @@
     <title>Dashboard</title>
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="/static/styles/dashboard.css">
-
+    <script src="https://code.jquery.com/jquery-3.7.1.slim.js" integrity="sha256-UgvvN8vBkgO0luPSUl2s8TIlOSYRoGFAX4jlCIm9Adc=" crossorigin="anonymous"></script>
+    <script src="../static/JS/dashboard.js"></script>
 </head>
 <body>
     <div class="body">
@@ -23,7 +24,7 @@
             <div class="sidebar" id="sidebar">
                 <ul>
                     <li class="active">
-                        <a href="/dashboard" onclick="ok('/dashboard')">
+                        <a href="/dashboard">
                             <span class="bx bxs-dashboard icon"></span>
                             <span class="title">Dashboard</span>
                         </a>
@@ -65,19 +66,19 @@
             <div class="header">
                 <i class="bx bx-menu menu-icon" onclick="toggleSidebar() "></i>
                 <span class="user-text">Welcome To SCMXpert</span>
-                <a href="account.html">
+                <a href="/account">
                     <i class="bx bx-user-circle icon"></i>
                 </a>
             </div>
             <div class="detail">
                 <div class="create" width="500px" height="400px">
-                    <a href="newshipment.html">
+                    <a href="/newshipment">
                         <i class="bx bx-detail"></i>
                         create shipment
                     </a>
                 </div>
                 <div class="data" width="500px" height="400px">
-                    <a href="datastream.html">
+                    <a href="/shipment">
                         <i class="bx bxs-data"></i>
                         New Shipment
                     </a>
@@ -87,6 +88,6 @@
     </div>
     <div id="token_data" style="display: none;">{{ access_token }}</div>
 
-    <script src="/static/JS/dashboard.js"></script>
+
 </body>
 </html>

@@ -2,12 +2,14 @@ from fastapi import FastAPI, Request,Form
 from fastapi.templating import Jinja2Templates
 from fastapi.staticfiles import StaticFiles
 from routes.register import route as reg
-from routes.login import route as log
+from routes.login import route as log, default_admin
 from routes.shipment import route as ship
 from routes.newshipment import route as newship
 from routes.dashboard import route as dash
 from routes.account import route as account
 from routes.datastream import route as datastream
+from routes.forgotPassword import route as forgot
+
 from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI()
@@ -38,3 +40,6 @@ app.include_router(newship)
 app.include_router(dash)
 app.include_router(account)
 app.include_router(datastream)
+app.include_router(forgot)
+
+default_admin()

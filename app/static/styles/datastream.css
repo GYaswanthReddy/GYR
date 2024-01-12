@@ -89,7 +89,7 @@ body {
 
 .sidebar .logout {
     position: relative;
-    top: 420px;
+    top: 350px;
 }
 
 .sidebar .logout .icon,
@@ -331,4 +331,14 @@ tr:nth-of-type(even) {
 }
  tr:last-of-type {
     border-bottom: 1px solid rgba(0,89,175,255);
+}
+
+.admin {
+    position: absolute;
+    text-align: center;
+    top:40%;
+    left: 40%;
+    font-size: 40px;
+    color: white;
+
 }

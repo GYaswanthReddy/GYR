@@ -7,7 +7,8 @@
     <title>Dashboard</title>
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="/static/styles/newshipment.css">
-    <script src="/static/JS/newshipment.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.slim.js" integrity="sha256-UgvvN8vBkgO0luPSUl2s8TIlOSYRoGFAX4jlCIm9Adc=" crossorigin="anonymous"></script>
+    <script src="../static/JS/newshipment.js"></script>
 </head>
 
 <body>
@@ -55,7 +56,7 @@
                         </a>
                     </li>
                     <li class="logout">
-                        <a href="/login">
+                        <a href="/login" onclick="logout()">
                             <span class="bx bx-log-out icon"></span>
                             <span class="title">Logout</span>
                         </a>
@@ -67,13 +68,14 @@
             <div class="header">
                 <i class="bx bx-menu menu-icon" onclick="toggleSidebar() "></i>
                 <span class="user-text">New Shipment</span>
-                <a href="#">
+                <a href="/account">
                     <i class="bx bx-user-circle icon"></i>
                 </a>
             </div>
                 <div class="detail">
                     <div class="form">
-                        <form action="/newshipment" method="post">
+                        <span id="error-message"></span>
+                        <form>
                             <div class="div1">
                                 <div class="left">
                                     <label for="shipment_number">Shipment Number<i class="danger-text" style="color: red;">*</i></label><br>
@@ -88,7 +90,7 @@
                                 <div class="left">
                                     <label for="route_details">Route Details<i class="danger-text" style="color: red;">*</i></label><br>
                                     <select name="route_details" id="route_details" required>
-                                        <option value="Selectroute">Select route</option>
+                                        <option value="" disabled selected>Select route</option>
                                         <option value="Chittoor">Chittoor</option>
                                         <option value="Nellore">Nellore</option>
                                         <option value="Vizag">Vizag</option>
@@ -98,7 +100,7 @@
                                 <div class="right">
                                     <label for="goods_type">Goods Type<i class="danger-text" style="color: red;">*</i></label><br>
                                     <select name="goods_type" id="goods_type" required>
-                                        <option value="Selectgoods">Select goods</option>
+                                        <option value="" disabled selected>Select goods</option>
                                         <option value="Fragile">Fragile</option>
                                         <option value="Medical">Medical</option>
                                         <option value="Hardware">Hardware</option>
@@ -110,7 +112,7 @@
                                 <div class="left">
                                     <label for="device">Device<i class="danger-text" style="color: red;">*</i></label><br>
                                     <select name="device" id="device" required>
-                                        <option value="Select device">Select Device</option>
+                                        <option value="" disabled selected>Select Device</option>
                                         <option value="device2">device2</option>
                                         <option value="device3">device3</option>
                                     </select>
@@ -151,7 +153,7 @@
                                 </div>
                             </div>
                             <input type="reset" name="Clear" id="Clear" value="Clear" class="clear">
-                            <input type="submit" name="Submit" id="Submit" value="Submit" class="submit">
+                            <input type="submit"  value="Submit" class="submit" id="submit-form">
                         </form>
                     </div>
                 </div>
