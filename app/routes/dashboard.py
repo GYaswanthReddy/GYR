@@ -1,10 +1,9 @@
-from fastapi import APIRouter, Request,Form, Depends
+from fastapi import APIRouter, Request
 from fastapi.templating import Jinja2Templates
 from fastapi.staticfiles import StaticFiles
 from config.config import *
-from fastapi.responses import RedirectResponse,HTMLResponse
 from routes.create_token import *
-from fastapi.security import OAuth2PasswordRequestForm, OAuth2PasswordBearer
+from fastapi.security import OAuth2PasswordBearer
 
 route = APIRouter()
 
@@ -14,6 +13,7 @@ templates = Jinja2Templates(directory='templates')
 
 route.mount("/static", StaticFiles(directory = "static"), name = "static")
 
+#route to render dashboard html page
 @route.get("/dashboard")
 def dashboard(request: Request):
     return templates.TemplateResponse("dashboard.html", {"request": request})

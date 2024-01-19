@@ -1,6 +1,6 @@
 // Functionality for login transition
 $(document).ready(function(){
-    $("#error-message").css("visibility", "hidden");
+    $("#error_message").css("visibility", "hidden");
   });
 const login_btn = document.querySelector("#login-link");
 const register_btn = document.querySelector("#register-link");
@@ -80,23 +80,32 @@ document.getElementById('submit-login').addEventListener('click', function(event
         }
     })
     .then(response => {
-        console.log(`${response.role}`);
-        localStorage.setItem("access_token", `${response.access_token}`);
-        sessionStorage.setItem("username", `${response.username}`);
-        sessionStorage.setItem("email", `${response.email}`);
-        if (response.role !== null) {
-            sessionStorage.setItem("role", `${response.role}`);
-        }
-        if (localStorage.getItem("access_token") !== null) {
-            window.location.href= "/dashboard";
-        }
+        if (response.role !== undefined | response.role !== null) {
+            console.log(`${response.role}`);
+            localStorage.setItem("access_token", `${response.access_token}`);
+            sessionStorage.setItem("username", `${response.username}`);
+            sessionStorage.setItem("email", `${response.email}`);
+            if (response.role !== null) {
+                sessionStorage.setItem("role", `${response.role}`);
+            }
+            if (localStorage.getItem("access_token") !== null) {
+                window.location.href= "/dashboard";
+            }
+            else {
+                throw new Error("Unexpected response format");
+            }
+        }   
         else {
-            throw new Error("Unexpected response format");
+            $("#error_message").text("Wrong Credentails");
+            $("#error_message").css("visibility", "visible");
         }
     })
     .catch(error => {
-        $("#error-message").text(error.message);
-        $("#error-message").css("visibility", "visible");
+        $("#error_message").text("Wrong Credentails");
+        $("#error_message").css("visibility", "visible");
+        document.getElementById('email').addEventListener('click', function(event)  {
+            $("#error_message").css("visibility", "hidden");
+        });
     })
 
 });

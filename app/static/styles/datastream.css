@@ -89,7 +89,7 @@ body {
 
 .sidebar .logout {
     position: relative;
-    top: 350px;
+    top: 310px;
 }
 
 .sidebar .logout .icon,
@@ -235,11 +235,11 @@ body.minimized .sidebar ul li .icon {
 
 .detail {
     position: fixed;
-    width: 900px;
+    width: 1200px;
     height: 700px;
     /* background-color: white; */
     top: 15%;
-    left: 30%;
+    left: 25%;
 }
 
 .detail .top {
@@ -253,7 +253,7 @@ body.minimized .sidebar ul li .icon {
 
 .detail .top .device-search {
     position: fixed;
-    left: 33%;
+    left: 36%;
     top: 25%;
 }
 
@@ -272,7 +272,7 @@ body.minimized .sidebar ul li .icon {
 .top input[type=submit] {
     position: fixed;
     top: 28%;
-    left: 63%;
+    left: 65%;
     width: 180px;
     height: 40px;
     border-radius: 10px;
@@ -290,7 +290,7 @@ body.minimized .sidebar ul li .icon {
     top: 35%;
     left: 1%;
     background: white;
-    width: 900px;
+    width: 1200px;
     height: 500px;
     overflow-y: auto;
     border-radius: 10px;
@@ -319,7 +319,7 @@ tr {
     border-collapse: collapse;
 }
 
-tr:hover{ 
+tr:nth-of-type(n+1):hover{ 
     
     background: #f3f3f3;
     transform: scale(1.02);

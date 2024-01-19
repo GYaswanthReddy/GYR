@@ -90,7 +90,7 @@ body {
 
 .sidebar .logout {
     position: relative;
-    top: 420px;
+    top: 380px;
 }
 
 .sidebar .logout .icon,
@@ -255,7 +255,7 @@ body.minimized .sidebar ul li .icon {
     flex-direction: row; 
     
 }
-#error-message {
+#msg {
     color: red;
 }
 

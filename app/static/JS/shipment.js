@@ -68,7 +68,7 @@ $(document).ready(function(){
         }
         return response.json();
       }).then(response => {
-        console.log(response);
+        console.log(typeof response);
         let shipment_data = "";
         for (let shipment_no = 0; shipment_no < response.length; shipment_no++) {
             const shipment = response[shipment_no];

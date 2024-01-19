@@ -7,16 +7,21 @@ from fastapi import Depends
 from config.config import *
 
 
-
+#Secret key for jwt token
 secret_key = "mykey"
+
+#algorithm to encode jwt token
 algorithm = 'HS256'
+
+#Token expiration time
 token_expire = datetime.datetime.utcnow() + datetime.timedelta(minutes=60)
 
+#Creating instance to hash or verify hashed password
 pwd_encode = CryptContext(schemes=["bcrypt"], deprecated = "auto")
 
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl = 'login')
 
-
+#Token pydantic models
 class Token(BaseModel):
     access_token : str
     token_type : str
@@ -24,17 +29,21 @@ class Token(BaseModel):
 # class TokenData(BaseModel):
 #     email : str | None = None
 
+#User pydantic models
 class User(BaseModel):
     email : str
     username : str
 
+#Function to verify hash_password in database to plain password in the form
 def verify_password(password, hash_password):
     return pwd_encode.verify(password,hash_password)
 
+#Filtering user credentials using email 
 def get_user(email: str):
     user = REGISTER_COL.find_one({"email": email})
     return user
 
+#Authenticating the user by checking password 
 def authenticate_user(email : str, password : str = None, form_data : OAuth2PasswordRequestForm = None):
     if form_data:
         email = form_data.username
@@ -48,23 +57,37 @@ def authenticate_user(email : str, password : str = None, form_data : OAuth2Pass
         return user
     return None
 
-
+#function for creating JWT token
 def create_access_token(user_data : dict):
+
+    #copy the user_data to preserve the original data
     encode = user_data.copy()
+
+    #creating expire time for JWT token
     expire = datetime.datetime.utcnow() + datetime.timedelta(minutes = 60)
+
+    #saving the expire in user_data to encode with jwt token
     encode.update({"exp" : expire})
+
+    #Encoding the jwt by combining encode, secret key and algorithm
     jwt_token = jwt.encode(encode, secret_key, algorithm=algorithm)
     return jwt_token
 
-
+#Fucntion to decode the jwt token 
 def get_current_user(token: str = Depends(oauth2_scheme)):
     #print(token,"get_user")
     if not token:
         return False
     #print(token,"im in get_current_user")
+
+    #Decoding jwt token
     payload = jwt.decode(token, secret_key, algorithms=[algorithm])
+
+    #Saving the email in JWT token
     email = payload.get('sub')
     #print(email,"im in get_current")
+
+    #get user by email
     user = get_user(email)
     #print(user, "im in get_current")
     if user:

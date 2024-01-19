@@ -6,6 +6,15 @@ if(sessionStorage.getItem("username") == null)
 }
 $(document).ready(function(){
   $("#error-message").css("visibility", "hidden");
+  function getCurrentDate() {
+    const currentday = new Date();
+    const year = currentday.getFullYear();
+    const month = (currentday.getMonth() + 1).toString().padStart(2, '0');
+    const day = currentday.getDate().toString().padStart(2, '0');
+    return `${year}-${month}-${day}`;
+}
+  // Set the minimum date for the date input field
+  document.getElementById("delivery_date").min = getCurrentDate();
 });
 
 
@@ -57,13 +66,11 @@ document.addEventListener('DOMContentLoaded', function () {
       toggleSidebar();
     });
   });
-
-  
   
   // jwt token retrieval
 document.addEventListener("DOMContentLoaded", function() {
     document.getElementById("submit-form").addEventListener("click", function(event) {
-      event.preventDefault();
+      // event.preventDefault();
         console.log("Dom load");
         fetch("/newshipment", {
               method: "POST",
@@ -87,23 +94,30 @@ document.addEventListener("DOMContentLoaded", function() {
               }),
           })
               .then(response => {
-                  if (response.status === 200) {
-                      return response.json();
+                  if (response.status === 200) {  
+                    return response.json();
                   } 
                   else {
-                    $("#error-message").text("Please Enter the emplty fields");
-                    $("#error-message").css("visibility", "visible");
+                    $("#msg").text("Please Enter the emplty fields");
+                    $("#msg").css("visibility", "visible");
                 }
               })
-              .catch(error => {
-                $("#error-message").text(error.message);
-                $("#error-message").css("visibility", "visible");
+              .then(jsonResponse => {
+                // Access and display the message from the jsonResponse
+                if (jsonResponse.message) {
+                    console.log(jsonResponse.message);
+                    $("#msg").text(jsonResponse.message);
+                    $("#msg").css("visibility", "visible");
+                } else {
+                    throw new Error("Unexpected response format");
+                }
             })
-            
+              .catch(error => {
+                $("#msg").text("Please Enter All Fields");
+                $("#msg").css("visibility", "visible");
+            })
     });
 });
-
-
 
 
 // jwt token delete

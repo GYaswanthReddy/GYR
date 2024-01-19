@@ -80,14 +80,16 @@
                 <div class="top">
                     <h2>Please Select a Device Id to See the Data Stream</h2>
                     <div class="device-search">
-                        <label for="device_id">Device Id<i class="danger-text" style="color: red;">*</i></label><br>
-                        <select name="device_id" id="device_id">
-                            <option value="Select Device">Select Device</option>
-                            <option value="device1">device1</option>
-                            <option value="device2">device2</option>
-                        </select>
+                        <form id="device_form">
+                            <label for="device_id">Device Id<i class="danger-text" style="color: red;">*</i></label><br>
+                            <select name="device_id" id="device_id">
+                                <option value="Select Device">Select Device</option>
+                                <option value="1234567890">1234567890</option>
+                                <option value="1234567891">1234567891</option>
+                            </select>
+                        </form>
                     </div>
-                    <input type="submit" value="Get Device Data">
+                    <input type="submit" value="Get Device Data" id="submit-form">
                 </div>
                 <div class="bottom">
                     <table>
@@ -102,7 +104,7 @@
                             </tr>
                         </thead>
                         <tbody id="table_body">
-
+                            
                         </tbody>
                     </table>
                 </div>

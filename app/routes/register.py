@@ -13,18 +13,25 @@ templates = Jinja2Templates(directory='templates')
 route.mount("/static", StaticFiles(directory = "static"), name = "static")
 
 
-
+#route for rending the login html page
 @route.get("/register")
 def register(request: Request): 
     return templates.TemplateResponse("login.html", {"request": request})
 
-
+#route for register details
 @route.post("/register")
 def register(request: Request, username: str=Form(), email: str=Form(), new_password: str=Form(),  confirm_password: str=Form()):
     try:
+        #condition for username has any value
         if username:
+
+            #checking whether the password has upper char, special symbol, length equal or greater than 7
             if len(new_password) >= 7 and any(char.isupper() for char in new_password) and any(not char.isupper() for char in new_password):
+
+                #Hashing the user password using passlib bcrypt to store in database
                 hash_password = pwd_encode.hash(new_password)
+
+                #storing user credentials in database
                 user_data = {
                     "username" : username,
                     "email" : email,
