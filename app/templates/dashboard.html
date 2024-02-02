@@ -4,9 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard</title>
+    <link rel="icon" type="image/x-icon" href="/static/images/transport-logistic-manager-engineer-checking-generative-ai-illustration_145713-1316.webp">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="/static/styles/dashboard.css">
     <script src="https://code.jquery.com/jquery-3.7.1.slim.js" integrity="sha256-UgvvN8vBkgO0luPSUl2s8TIlOSYRoGFAX4jlCIm9Adc=" crossorigin="anonymous"></script>
+    <script src="/static/JS/menubar.js"></script>
     <script src="../static/JS/dashboard.js"></script>
 </head>
 <body>
@@ -65,7 +67,7 @@
         <div class="mainbody">
             <div class="header">
                 <i class="bx bx-menu menu-icon" onclick="toggleSidebar() "></i>
-                <span class="user-text">Welcome To SCMXpert</span>
+                <span class="user-text">Welcome <span id="user_name"></span> To SCMXpert</span>
                 <a href="/account">
                     <i class="bx bx-user-circle icon"></i>
                 </a>
@@ -74,20 +76,17 @@
                 <div class="create" width="500px" height="400px">
                     <a href="/newshipment">
                         <i class="bx bx-detail"></i>
-                        create shipment
+                        Create Shipment
                     </a>
                 </div>
                 <div class="data" width="500px" height="400px">
-                    <a href="/shipment">
+                    <a href="/datastream">
                         <i class="bx bxs-data"></i>
-                        New Shipment
+                        Device Data
                     </a>
                 </div>
             </div>
         </div>
     </div>
-    <div id="token_data" style="display: none;">{{ access_token }}</div>
-
-
 </body>
 </html>

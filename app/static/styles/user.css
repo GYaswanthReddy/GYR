@@ -370,7 +370,7 @@ input, select {
     border: 1px solid rgb(190, 189, 189);
 }
 #submit {
-    margin-top: 20px;
+    margin-top: 30px;
     position: absolute;
     width: 120px;
     height: 35px;
@@ -379,4 +379,10 @@ input, select {
     background: #0082e6;
     color: white;
     left: 35%;
+}
+
+#msg{
+    position: absolute;
+    color: green;
+    left: 170px;
 }

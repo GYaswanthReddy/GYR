@@ -53,17 +53,19 @@ def usermanage(request: Request):
 @route.post("/usermanagement")
 def user(request:Request, email:str = Form(), role : str = Form(), token:str = Depends(get_current_user)):
     try:
-        if email:
+        user = get_user(email)
+        if user:
             print(role,"role")
 
             #checking the role of the user whether they are admin or not
             if token["role"] == "admin":
-
-                #update the user role to admin by admin
-                success = REGISTER_COL.update_one({"email" : email}, {"$set": {"role" : role}})
-                return JSONResponse(content={"message" : "success"}, status_code=200)
+                if user['role'] != "admin":
+                    #update the user role to admin by admin
+                    success = REGISTER_COL.update_one({"email" : email}, {"$set": {"role" : role}})
+                    return JSONResponse(content={"message" : "success"}, status_code=200)
+                return JSONResponse(content={"message" : "The user is admin"}, status_code=401)
             return JSONResponse(content={"message" : "No admin found"}, status_code=401)
         return JSONResponse(content={"message" : "User Not found"}, status_code=401)
-    except Exception as e:
+    except Exception:
         return JSONResponse(content={"message" : "Token Not Found"}, status_code=401)
         

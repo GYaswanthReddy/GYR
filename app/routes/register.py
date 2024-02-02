@@ -24,23 +24,23 @@ def register(request: Request, username: str=Form(), email: str=Form(), new_pass
     try:
         #condition for username has any value
         if username:
-
+            if confirm_password == new_password:
             #checking whether the password has upper char, special symbol, length equal or greater than 7
-            if len(new_password) >= 7 and any(char.isupper() for char in new_password) and any(not char.isupper() for char in new_password):
+                if len(new_password) >= 7 and any(char.isupper() for char in new_password) and any(not char.isupper() for char in new_password):
 
-                #Hashing the user password using passlib bcrypt to store in database
-                hash_password = pwd_encode.hash(new_password)
+                    #Hashing the user password using passlib bcrypt to store in database
+                    hash_password = pwd_encode.hash(new_password)
 
-                #storing user credentials in database
-                user_data = {
-                    "username" : username,
-                    "email" : email,
-                    "password" : hash_password,
-                    "role" : "user"
-                }
-                REGISTER_COL.insert_one(user_data) 
-                return templates.TemplateResponse("login.html", {"request": request, "msg": "Succesfully Registered! Please Login"})
-            return templates.TemplateResponse("login.html", {"request": request, "msg": "Password must contain atleast one upper & special symbol & length equal or greater than 7"})
+                    #storing user credentials in database
+                    user_data = {
+                        "username" : username,
+                        "email" : email,
+                        "password" : hash_password,
+                        "role" : "user"
+                    }
+                    REGISTER_COL.insert_one(user_data) 
+                    return templates.TemplateResponse("login.html", {"request": request, "msg": "Succesfully Registered! Please Login"})
+                return templates.TemplateResponse("login.html", {"request": request, "msg": "Password must contain atleast one upper & special symbol & length equal or greater than 7"})
         return templates.TemplateResponse("login.html", {"request": request}) 
     except Exception as e:
         return {"msg" : "Server busy at the moment! Please try again"}

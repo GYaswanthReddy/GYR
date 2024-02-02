@@ -8,7 +8,7 @@ import time
 socket_conn = socket.socket()
 print("socket created")
 
-socket_conn.bind(("127.0.0.1", 9999))
+socket_conn.bind(("", 9999))
 
 socket_conn.listen(3)
 print("waiting for client connections")

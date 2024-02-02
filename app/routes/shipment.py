@@ -1,11 +1,10 @@
-from fastapi import APIRouter, Request,Header,Depends
+from fastapi import APIRouter, Request,Depends
 from fastapi.templating import Jinja2Templates
 from fastapi.responses import JSONResponse
 from fastapi.staticfiles import StaticFiles
 from routes.create_token import *
 from config.config import *
 from fastapi.security import OAuth2PasswordBearer
-import copy
 
 route = APIRouter()
 oauth2_schema = OAuth2PasswordBearer(tokenUrl="token")

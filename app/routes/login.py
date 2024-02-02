@@ -1,9 +1,9 @@
-from fastapi import APIRouter, Request,Form
+from fastapi import APIRouter, Request,Depends
 from fastapi.templating import Jinja2Templates
 from fastapi.staticfiles import StaticFiles
 from config.config import *
 from routes.create_token import *
-from fastapi.security import OAuth2PasswordBearer
+from fastapi.security import OAuth2PasswordBearer,OAuth2PasswordRequestForm
 from fastapi.responses import JSONResponse
 
 route = APIRouter()
@@ -14,8 +14,9 @@ templates = Jinja2Templates(directory='templates')
 
 route.mount("/static", StaticFiles(directory = "static"), name = "static")
 
-
-
+@route.get("/")
+def home(request: Request): 
+    return templates.TemplateResponse("home.html", {"request": request})
 
 # Route to render login html page
 @route.get("/login")
@@ -24,21 +25,22 @@ def login(request: Request):
 
 #Route for login details
 @route.post("/login")
-async def login(request: Request, email : str = Form(), password : str = Form()):
+def login(request: Request, form_data : OAuth2PasswordRequestForm = Depends()):
+    print(form_data.username)
     try: 
 
         #verifing user credentials with database
-        user = authenticate_user(email = email, password = password)
+        user = authenticate_user(email = form_data.username, password = form_data.password)
         print(user)
         if user:
 
             #Generating JWT token
             access_token = create_access_token(user_data = {"sub": user["email"]})
             token = Token(access_token=access_token, token_type="bearer")
-
+            token_expire = datetime.datetime.utcnow() + datetime.timedelta(seconds=20)
+            print(token_expire,datetime.datetime.now())
             #retur the JWT token, username, email, role to store in localstorage
-            return JSONResponse(content={"access_token": access_token, "username": user["username"], "email": user["email"], "role": user["role"]}, status_code=200)
+            return JSONResponse(content={"access_token": access_token, "username": user["username"], "email": user["email"], "role": user["role"], "expire" : str(token_expire)}, status_code=200)
     except Exception as e:
-        
         #Error msg for invalid credentails
         return JSONResponse(content={"msg": "User Not Found or Invalid Credentials"}, status_code=401)

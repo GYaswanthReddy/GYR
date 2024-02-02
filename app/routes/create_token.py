@@ -50,12 +50,11 @@ def authenticate_user(email : str, password : str = None, form_data : OAuth2Pass
         password = form_data.password
     
     user = get_user(email)
-    # User(email = email, username = user["username"])
-    # print("test.....", verify_password(password, user["password"]))
-    # print(not user)
-    if user and verify_password(password, user["password"]):
-        return user
-    return None
+    if user:
+        if verify_password(password, user["password"]):
+            return user
+        return {"msg" : "password does not match"}
+    return {"msg" : "email does not exist"}
 
 #function for creating JWT token
 def create_access_token(user_data : dict):
@@ -68,7 +67,7 @@ def create_access_token(user_data : dict):
 
     #saving the expire in user_data to encode with jwt token
     encode.update({"exp" : expire})
-
+    
     #Encoding the jwt by combining encode, secret key and algorithm
     jwt_token = jwt.encode(encode, secret_key, algorithm=algorithm)
     return jwt_token

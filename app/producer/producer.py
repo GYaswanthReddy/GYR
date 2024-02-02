@@ -15,6 +15,7 @@ topic = os.getenv('topic')
 client = socket.socket()
 
 client.connect((host,port))
+print(client)
 
 config = {'bootstrap.servers' : bootstrap_server}
 
@@ -27,6 +28,3 @@ while True:
     print(message)
     producer.produce(topic, key = 'kafka', value = message)
     
-
-
-

@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Header, Request,Form, Depends
+from fastapi import APIRouter, Header, Request,Depends
 from fastapi.responses import JSONResponse
 from fastapi.templating import Jinja2Templates
 from fastapi.staticfiles import StaticFiles
@@ -41,10 +41,9 @@ def newShipment(request: Request, newShipment: NewShipment | None = None, author
     print(newShipment)
     print("jAuth", authorization)
     try:
-
         #Condition to check whether data is null or not
         if newShipment:
-            print(request.get("Authorization"))
+            # print(request.get("Authorization"))
             print(token)
             # user = get_current_user(token)
 

@@ -51,61 +51,61 @@ document.addEventListener('click', function (event) {
     }
 });
 
-
-
 // jwt token storing in localstorage
-
 document.getElementById('submit-login').addEventListener('click', function(event) {
     // Prevent the default action (navigation to the specified URL)
     event.preventDefault();
-
-    // Now, you can add your custom logic
-    console.log($("#email").val())
-    console.log($("#password").val())
-    const formData = new FormData();
-    formData.append("email", $("#email").val());
-    formData.append("password", $("#password").val());
-    fetch("/login", {
-        method: "POST",
-        body: formData
-    })
-    .then(response => {
-        if(response.status === 200)
-        {
-            return response.json();
-        }
-        else
-        {
-            throw new Error("User Not Found or Invalid Credentials");
-        }
-    })
-    .then(response => {
-        if (response.role !== undefined | response.role !== null) {
-            console.log(`${response.role}`);
-            localStorage.setItem("access_token", `${response.access_token}`);
-            sessionStorage.setItem("username", `${response.username}`);
-            sessionStorage.setItem("email", `${response.email}`);
-            if (response.role !== null) {
-                sessionStorage.setItem("role", `${response.role}`);
+    if (localStorage.getItem('_grecaptcha') !== null) {
+        console.log($("#email").val())
+        console.log($("#password").val())
+        const formData = new FormData();
+        formData.append("username", $("#email").val());
+        formData.append("password", $("#password").val());
+        fetch("/login", {
+            method: "POST",
+            body: formData
+        })
+        .then(response => {
+            if(response.status === 200)
+            {
+                return response.json();
             }
-            if (localStorage.getItem("access_token") !== null) {
-                window.location.href= "/dashboard";
+            else
+            {
+                throw new Error("User Not Found or Invalid Credentials");
             }
+        })
+        .then(response => {
+            if (response.role !== undefined | response.role !== null) {
+                console.log(`${response.role}`,response);
+                localStorage.setItem("access_token", `${response.access_token}`);
+                sessionStorage.setItem("username", `${response.username}`);
+                sessionStorage.setItem("email", `${response.email}`);
+                if (response.role !== null) {
+                    sessionStorage.setItem("role", `${response.role}`);
+                    sessionStorage.setItem('exp', `${response.expire}`);
+                }
+                if (localStorage.getItem("access_token") !== null) {
+                    window.location.href= "/dashboard";
+                }
+                else {
+                    throw new Error("Unexpected response format");
+                }
+            }   
             else {
-                throw new Error("Unexpected response format");
+                $("#error_message").text("Wrong Credentails");
+                $("#error_message").css("visibility", "visible");
             }
-        }   
-        else {
+        })
+        .catch(error => {
             $("#error_message").text("Wrong Credentails");
             $("#error_message").css("visibility", "visible");
-        }
-    })
-    .catch(error => {
-        $("#error_message").text("Wrong Credentails");
-        $("#error_message").css("visibility", "visible");
-        document.getElementById('email').addEventListener('click', function(event)  {
-            $("#error_message").css("visibility", "hidden");
-        });
-    })
-
+            document.getElementById('email').addEventListener('click', function(event)  {
+                $("#error_message").css("visibility", "hidden");
+            });
+        })
+} else {
+    $("#error_message").text("Please Check Captcha");
+    $("#error_message").css("visibility", "visible");
+}
 });
