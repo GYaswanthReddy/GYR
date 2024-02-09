@@ -1,8 +1,8 @@
 from fastapi import APIRouter, Request,Depends
+import datetime
 from fastapi.templating import Jinja2Templates
 from fastapi.staticfiles import StaticFiles
-from config.config import *
-from routes.create_token import *
+from routes.create_token import authenticate_user,create_access_token,Token
 from fastapi.security import OAuth2PasswordBearer,OAuth2PasswordRequestForm
 from fastapi.responses import JSONResponse
 
@@ -13,10 +13,6 @@ oauth2_schema = OAuth2PasswordBearer(tokenUrl="token")
 templates = Jinja2Templates(directory='templates')
 
 route.mount("/static", StaticFiles(directory = "static"), name = "static")
-
-@route.get("/")
-def home(request: Request): 
-    return templates.TemplateResponse("home.html", {"request": request})
 
 # Route to render login html page
 @route.get("/login")
@@ -32,15 +28,15 @@ def login(request: Request, form_data : OAuth2PasswordRequestForm = Depends()):
         #verifing user credentials with database
         user = authenticate_user(email = form_data.username, password = form_data.password)
         print(user)
-        if user:
-
+        if 'msg' not in user:
             #Generating JWT token
             access_token = create_access_token(user_data = {"sub": user["email"]})
-            token = Token(access_token=access_token, token_type="bearer")
-            token_expire = datetime.datetime.utcnow() + datetime.timedelta(seconds=20)
+            
+            token_expire = datetime.datetime.utcnow() + datetime.timedelta(minutes=60)
             print(token_expire,datetime.datetime.now())
             #retur the JWT token, username, email, role to store in localstorage
             return JSONResponse(content={"access_token": access_token, "username": user["username"], "email": user["email"], "role": user["role"], "expire" : str(token_expire)}, status_code=200)
-    except Exception as e:
+        return JSONResponse(content=user, status_code=401)
+    except Exception:
         #Error msg for invalid credentails
         return JSONResponse(content={"msg": "User Not Found or Invalid Credentials"}, status_code=401)

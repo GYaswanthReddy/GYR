@@ -1,3 +1,9 @@
+// checking for username in session
+if(sessionStorage.getItem("username") == null)
+{
+  window.location.href = "/login";
+}
+
 // checking for username in session and checking for session timeout
 $(document).ready(function() {
   const expireTime = new Date(sessionStorage.getItem('exp'));
@@ -14,11 +20,6 @@ $(document).ready(function() {
 }
 });
 
-// checking for username in session
-if(sessionStorage.getItem("username") == null)
-{
-  window.location.href = "/login";
-}
 
 // display error msg for users
   $(document).ready(function() {

@@ -53,3 +53,16 @@ button{
     background: rgb(0, 132, 255);
 
 }
+
+.header {
+    position: absolute;
+    top: 25px;
+    right: 10px;
+    font-size: 22px;
+    z-index: 1;
+    
+}
+.header a {
+    margin-right: 40px;
+    color: white;
+}

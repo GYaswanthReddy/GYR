@@ -3,9 +3,9 @@ from fastapi.responses import JSONResponse
 from fastapi.templating import Jinja2Templates
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
-from config.config import *
+from config.config import SHIPMENT
 from fastapi.security import OAuth2PasswordBearer
-from routes.create_token import *
+from routes.create_token import get_current_user
 
 route = APIRouter()
 
@@ -32,42 +32,39 @@ class NewShipment(BaseModel):
 
 #route to render the newshipment html page
 @route.get("/newshipment")
-def newShipment(request: Request):
+def newshipment(request: Request):
     return templates.TemplateResponse("newshipment.html", {"request": request})
 
 #Route for newhsipment form data and store in database
 @route.post("/newshipment")
-def newShipment(request: Request, newShipment: NewShipment | None = None, authorization: str = Header(...), token: str = Depends(get_current_user)):
-    print(newShipment)
+def newshipment(request: Request, newshipment: NewShipment | None = None, authorization: str = Header(...), token: str = Depends(get_current_user)):
+    print(newshipment)
     print("jAuth", authorization)
     try:
         #Condition to check whether data is null or not
-        if newShipment:
-            # print(request.get("Authorization"))
-            print(token)
-            # user = get_current_user(token)
+        if newshipment:
 
             #conidition to check the token has any data
             if token:
 
                 #Checking whether shipment_number length is seven or not
-                if len(newShipment.shipment_number) == 7:
+                if len(newshipment.shipment_number) == 7:
                     shipment_details = {
                         "email" : token["email"],
-                        "shipment_number" : newShipment.shipment_number,
-                        "container_number" : newShipment.container_number,
-                        "route_details" : newShipment.route_details,
-                        "goods_type" : newShipment.goods_type,
-                        "device" : newShipment.device,
-                        "delivery_date" : newShipment.delivery_date,
-                        "po_number" : newShipment.po_number,
-                        "delivery_number" : newShipment.delivery_number,
-                        "ndc_number": newShipment.ndc_number,
-                        "batch_id" : newShipment.batch_id,
-                        "serial_number" : newShipment.serial_number,
-                        "shipment_description" : newShipment.shipment_description
+                        "shipment_number" : newshipment.shipment_number,
+                        "container_number" : newshipment.container_number,
+                        "route_details" : newshipment.route_details,
+                        "goods_type" : newshipment.goods_type,
+                        "device" : newshipment.device,
+                        "delivery_date" : newshipment.delivery_date,
+                        "po_number" : newshipment.po_number,
+                        "delivery_number" : newshipment.delivery_number,
+                        "ndc_number": newshipment.ndc_number,
+                        "batch_id" : newshipment.batch_id,
+                        "serial_number" : newshipment.serial_number,
+                        "shipment_description" : newshipment.shipment_description
                     }
-                    print(newShipment)
+                    print(newshipment)
 
                     # Using find_one method to check whether the shipment already present in the database
                     if SHIPMENT.find_one({"shipment_number" : shipment_details["shipment_number"]}):
@@ -80,7 +77,7 @@ def newShipment(request: Request, newShipment: NewShipment | None = None, author
             
         #error msg if any fields are empty or not.
         return  JSONResponse(content={"message": "Please Enter the fields"}, status_code=401)
-    except Exception as exception:
+    except Exception:
         
         # Handling Token decode exception
         return JSONResponse(content={"message": "UserNot found or Ivaild Credentials"}, status_code=401)

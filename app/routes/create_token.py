@@ -4,7 +4,7 @@ from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
 import datetime
 from jose import jwt
 from fastapi import Depends
-from config.config import *
+from config.config import REGISTER_COL
 
 
 #Secret key for jwt token
@@ -26,8 +26,6 @@ class Token(BaseModel):
     access_token : str
     token_type : str
 
-# class TokenData(BaseModel):
-#     email : str | None = None
 
 #User pydantic models
 class User(BaseModel):

@@ -1,7 +1,9 @@
 import pymongo
 
+username = "yaswanthg9966"
+password = "iqUGvzM42gzFrIwH"
 #Establing mongodb server
-MONGO_URI = 'mongodb+srv://yaswanthg9966:iqUGvzM42gzFrIwH@cluster0.tzvgwaf.mongodb.net/'
+MONGO_URI = f'mongodb+srv://{username}:{password}@cluster0.tzvgwaf.mongodb.net/'
 
 #instance for mongodb server
 Client = pymongo.MongoClient(MONGO_URI)

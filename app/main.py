@@ -9,6 +9,7 @@ from routes.dashboard import route as dashboard
 from routes.account import route as account
 from routes.datastream import route as datastream
 from routes.forgotPassword import route as forgot
+from routes.home import route as home
 
 # instance for fastapi 
 app = FastAPI()
@@ -23,6 +24,7 @@ app.mount("/static", StaticFiles(directory = "static"), name = "static")
 
 
 # Include the routes 
+app.include_router(home)
 app.include_router(login)
 app.include_router(register)
 app.include_router(shipment)

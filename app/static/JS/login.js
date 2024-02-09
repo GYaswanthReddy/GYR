@@ -72,11 +72,15 @@ document.getElementById('submit-login').addEventListener('click', function(event
             }
             else
             {
-                throw new Error("User Not Found or Invalid Credentials");
+                // throw new Error("User Not Found or Invalid Credentials");
+                response.json().then(error => {
+                    $("#error_message").text(error.msg);
+                    $("#error_message").css("visibility", "visible");
+                })
             }
         })
         .then(response => {
-            if (response.role !== undefined | response.role !== null) {
+            // if (response.role !== undefined | response.role !== null) {
                 console.log(`${response.role}`,response);
                 localStorage.setItem("access_token", `${response.access_token}`);
                 sessionStorage.setItem("username", `${response.username}`);
@@ -91,21 +95,22 @@ document.getElementById('submit-login').addEventListener('click', function(event
                 else {
                     throw new Error("Unexpected response format");
                 }
-            }   
-            else {
-                $("#error_message").text("Wrong Credentails");
-                $("#error_message").css("visibility", "visible");
-            }
+            // }   
+            // else {
+            //     $("#error_message").text("Wrong Credentails");
+            //     $("#error_message").css("visibility", "visible");
+            // }
         })
         .catch(error => {
-            $("#error_message").text("Wrong Credentails");
+            console.log(error);
+            $("#error_message").text(error.msg);
             $("#error_message").css("visibility", "visible");
-            document.getElementById('email').addEventListener('click', function(event)  {
-                $("#error_message").css("visibility", "hidden");
-            });
         })
 } else {
     $("#error_message").text("Please Check Captcha");
     $("#error_message").css("visibility", "visible");
 }
+document.getElementById('email').addEventListener('click', function(event)  {
+    $("#error_message").css("visibility", "hidden");
+});
 });

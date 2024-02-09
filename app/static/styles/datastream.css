@@ -319,7 +319,7 @@ tr {
     border-collapse: collapse;
 }
 
-tr:nth-of-type(n+1):hover{ 
+tr:nth-of-type(n+2):hover{ 
     
     background: #f3f3f3;
     transform: scale(1.02);

@@ -4,8 +4,10 @@ import os
 import json
 import pymongo
 
+username = "yaswanthg9966"
+password = "iqUGvzM42gzFrIwH"
 #Establing mongodb server
-MONGO_URI = 'mongodb+srv://yaswanthg9966:iqUGvzM42gzFrIwH@cluster0.tzvgwaf.mongodb.net/'
+MONGO_URI = f'mongodb+srv://{username}:{password}@cluster0.tzvgwaf.mongodb.net/'
 
 #instance for mongodb server
 Client = pymongo.MongoClient(MONGO_URI)
@@ -20,6 +22,7 @@ load_dotenv()
 bootstrap_server = os.getenv('bootstrap_servers')
 topic = os.getenv('topic')
 
+# Create the config for the consumer
 conf = {
     'bootstrap.servers': os.getenv("bootstrap_servers"),
     'group.id': os.getenv("group_id"),
@@ -28,11 +31,15 @@ conf = {
      
 }
 
+# Create kafka consumer
 consumer = Consumer(conf)
+
+# subscribe to the topic
 consumer.subscribe([topic])
 
 try:
     while True:
+        # Time to wait from the kafka to receive msg
         msg = consumer.poll(1.0)
 
         if msg is None:
@@ -48,11 +55,12 @@ try:
         # print(data)
         print('Received message: {}'.format(msg.value().decode('utf-8')))
         try:
+            # Convert the JSON string to python readable value
             json_data = json.loads(data)
-            # print('EFORE the db json_data',json_data)
+            
+            # Store the data in db
             DEVICE_DATA.insert_one(json_data)
-            # print('after the db',data)
-            # print('after the db json_data',json_data)
+           
         except json.JSONDecodeError as e:
             print(f"Error decoding JSON: {e}")
         
