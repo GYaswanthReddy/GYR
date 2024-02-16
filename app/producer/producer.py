@@ -31,6 +31,6 @@ while True:
     if not message:
         break
     print(message)
-    # Send the data that is received from server to the kafka consumer
+    # Send the data that is received from server to kafka consumer
     producer.produce(topic, key = 'kafka', value = message)
     

@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Request, Depends, Form, UploadFile, File
+from fastapi import APIRouter, Request, Depends, Form
 from fastapi.responses import JSONResponse
 from fastapi.templating import Jinja2Templates
 from fastapi.staticfiles import StaticFiles
@@ -6,7 +6,6 @@ from config.config import REGISTER_COL
 from routes.create_token import get_current_user
 from passlib.context import CryptContext
 from fastapi.security import OAuth2PasswordBearer
-import os
 
 route = APIRouter()
 
@@ -35,10 +34,10 @@ def update(request: Request, current_user : str = Depends(get_current_user), old
         print(current_user)
         # Check the current user has any data
         if current_user:
-            # Whether the password are matching or not
+            # Whether the passwords are matching or not
             if newpassword == confirmpassword:
                 # update the password and store in db
-                REGISTER_COL.update_one({'email' : current_user['username']}, {'$set' : {'password' : pwd_encode.hash(newpassword)}})
+                REGISTER_COL.update_one({'email' : current_user['email']}, {'$set' : {'password' : pwd_encode.hash(newpassword)}})
                 return JSONResponse(content={'message' : 'Successfully changed the password'}, status_code=200)
             return JSONResponse(content={'message' : 'New password and Confirm password are not matching'}, status_code=400)
         return JSONResponse(content={'message' : 'No User Found'}, status_code=400)

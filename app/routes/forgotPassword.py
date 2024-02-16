@@ -7,21 +7,21 @@ from random import randint
 
 
 route = APIRouter()
-
+forgot = 'forgot.html'
 templates = Jinja2Templates(directory='templates')
 
 route.mount("/static", StaticFiles(directory = "static"), name = "static")
 
-forgot = "forgot.html"
+
 
 #route to render the forgotpassword html page
 @route.get("/forgotpassword")
-def forgot(request: Request):
+def forgotpassword(request: Request):
     return templates.TemplateResponse(forgot, {"request": request})
 
 #route to handle the forgot password details to change the password for users
 @route.post("/forgotpassword")
-def forgot(request: Request, email: str=Form(), new_password: str = Form(), confirm_password : str = Form()):
+def forgotpassword(request: Request, email: str=Form(), new_password: str = Form(), confirm_password : str = Form()):
 
     #filtering the user credentials using email in database
     user = REGISTER_COL.find_one({"email" : email})

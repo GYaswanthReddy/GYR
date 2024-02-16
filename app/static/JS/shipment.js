@@ -35,6 +35,7 @@ $(document).ready(function(){
             const shipment = response[shipment_no];
     
             shipment_data = shipment_data + "<tr><td>" 
+            + shipment.email + "</td><td>"
             + shipment.shipment_number + "</td><td>"
             + shipment.container_number + "</td><td>"
             + shipment.route_details + "</td><td>"

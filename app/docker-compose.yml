@@ -2,7 +2,7 @@ version: '3'
 
 services:
   SCMXPERT:
-    image: main:latest
+    image: yaswanth2001/scmxpertlite:latest
     ports:
       - '8001:8001'
 
@@ -30,7 +30,7 @@ services:
 
 
   server:
-    image: server:latest
+    image: yaswanth2001/scmserver:latest
     ports:
       - '9999:9999'
     depends_on:
@@ -38,7 +38,7 @@ services:
   
 
   producer:
-    image: producer:latest
+    image: yaswanth2001/scmproducer:latest
     depends_on:
       - server
     environment:
@@ -49,7 +49,7 @@ services:
 
 
   consumer:
-    image: consumer:latest
+    image: yaswanth2001/scmconsumer:latest
     depends_on:
       - producer
     environment:

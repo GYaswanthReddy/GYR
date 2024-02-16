@@ -19,11 +19,11 @@
                 <p style="font-size: 20px;"><b>If you have any queries</b></p>
                 <label for="" style="font-size: 20px;"><b>Contact Us:</b></label><br>
                 <label for="name">Name:</label><br>
-                <input type="text" name="name" id="name" class="name" placeholder="Enter your name"><br>
+                <input type="text" name="name" id="name" class="name" placeholder="Enter your name" required><br>
                 <label for="name">Email:</label><br>
-                <input type="text" name="email" id="email" class="email" placeholder="Enter your email"><br>
+                <input type="text" name="email" id="email" class="email" placeholder="Enter your email" required><br>
                 <label for="name">Message:</label><br>
-                <textarea name="msg" id="msg" cols="25" rows="6" placeholder="message"></textarea><br>
+                <textarea name="msg" id="msg" cols="25" rows="6" placeholder="message" required></textarea><br>
                 {% if message %}
                     <p style="color: green;" id="message">{{message}}</p>
                 {% endif %}
@@ -33,7 +33,7 @@
         <div class="info">
             <p style="font-size: 23px;">If you like to Contact us</p><br>
             <h3><span class="bx bxs-phone"> </span>&nbsp;+1 800800800</h3><br>
-            <h3><span class="bx bxs-envelope"> </span>&nbsp;Admin@mail.com</h3><br>
+            <h3><span class="bx bxs-envelope"> </span>&nbsp;admin@mail.com</h3><br>
             <h3><p><span class="bx bxs-location-plus"></span>&nbsp;4421 Lobella Ct. Chester Springs, </p></h3>
             <h3><p>&nbsp;PA 19425 United States of America</p></h3>
         </div>

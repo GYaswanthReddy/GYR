@@ -243,8 +243,8 @@ body.minimized .sidebar ul li .icon {
     height: 780px;
     border-radius: 15px;
     background: linear-gradient(#69a3ec,#fae0d8,#07436f);
-    top: 15%;
-    left: 25%;
+    top: 12%;
+    left: 28%;
     padding: 60px 0 0 30px;
     box-shadow: 0 0 50px rgb(254,253,238);
 }

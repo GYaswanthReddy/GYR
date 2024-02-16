@@ -1,3 +1,7 @@
+if (sessionStorage.getItem('role') !== 'admin') {
+  window.location.href = '/dashboard';
+}
+
 // checking for username in session
 $(document).ready(function () {
   if (sessionStorage.getItem("role") === "admin") {

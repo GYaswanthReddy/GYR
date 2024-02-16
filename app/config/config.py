@@ -17,6 +17,7 @@ REGISTER_COL = DB["USERS"]
 #Creating shipment collection to store the shipment data
 SHIPMENT = DB["SHIPMENT_DATA"]
 
+#Creating device_data collection to store the device data
 DEVICE_DATA = DB["DEVICE_DATA"]
 
 

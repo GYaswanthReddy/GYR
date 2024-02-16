@@ -6,6 +6,7 @@ from pydantic import BaseModel
 from config.config import SHIPMENT
 from fastapi.security import OAuth2PasswordBearer
 from routes.create_token import get_current_user
+from models.models import NewShipment
 
 route = APIRouter()
 
@@ -15,20 +16,6 @@ oauth2_schema = OAuth2PasswordBearer(tokenUrl="token")
 
 route.mount("/static", StaticFiles(directory = "static"), name = "static")
 
-#pydantic model for newshipment to process the data
-class NewShipment(BaseModel):
-    shipment_number : str
-    container_number: str
-    route_details : str
-    goods_type : str
-    device : str
-    delivery_date : str
-    po_number : str
-    delivery_number : str
-    ndc_number : str
-    batch_id : str
-    serial_number : str
-    shipment_description : str
 
 #route to render the newshipment html page
 @route.get("/newshipment")
@@ -48,7 +35,7 @@ def newshipment(request: Request, newshipment: NewShipment | None = None, author
             if token:
 
                 #Checking whether shipment_number length is seven or not
-                if len(newshipment.shipment_number) == 7:
+                if len(str(newshipment.shipment_number)) == 7:
                     shipment_details = {
                         "email" : token["email"],
                         "shipment_number" : newshipment.shipment_number,
@@ -64,7 +51,7 @@ def newshipment(request: Request, newshipment: NewShipment | None = None, author
                         "serial_number" : newshipment.serial_number,
                         "shipment_description" : newshipment.shipment_description
                     }
-                    print(newshipment)
+                    print(newshipment, type(shipment_details["shipment_number"]))
 
                     # Using find_one method to check whether the shipment already present in the database
                     if SHIPMENT.find_one({"shipment_number" : shipment_details["shipment_number"]}):

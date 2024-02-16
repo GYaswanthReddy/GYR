@@ -1,7 +1,9 @@
 // Functionality for login transition
-$(document).ready(function(){
+$(document).ready(function () {
     $("#error_message").css("visibility", "hidden");
-  });
+    $("#register_msg").css("visibility", "hidden");
+    $("#register_error_msg").css("visibility", "hidden");
+});
 const login_btn = document.querySelector("#login-link");
 const register_btn = document.querySelector("#register-link");
 const container = document.querySelector(".container");
@@ -18,14 +20,14 @@ login_btn.addEventListener("click", () => {
 // Functionality for password visiblity
 function visible(iconId, passwordId) {
     var icon = document.getElementById(iconId);
-    
+
     icon.style.visibility = 'visible';
 }
 
 function togglePasswordVisibility(passwordId, iconId) {
     var password = document.getElementById(passwordId);
     var icon = document.getElementById(iconId);
-    
+
     if (password.type == "password") {
         password.type = "text";
         icon.className = 'bx bx-show';
@@ -52,65 +54,111 @@ document.addEventListener('click', function (event) {
 });
 
 // jwt token storing in localstorage
-document.getElementById('submit-login').addEventListener('click', function(event) {
+document.getElementById('submit-login').addEventListener('click', function (event) {
     // Prevent the default action (navigation to the specified URL)
-    event.preventDefault();
     if (localStorage.getItem('_grecaptcha') !== null) {
         console.log($("#email").val())
         console.log($("#password").val())
-        const formData = new FormData();
+        const formData = new FormData(document.getElementById("loginForm"));
         formData.append("username", $("#email").val());
         formData.append("password", $("#password").val());
+        if (formData.get("password") !== "") {
+            event.preventDefault();
         fetch("/login", {
             method: "POST",
             body: formData
         })
-        .then(response => {
-            if(response.status === 200)
-            {
-                return response.json();
-            }
-            else
-            {
-                // throw new Error("User Not Found or Invalid Credentials");
-                response.json().then(error => {
-                    $("#error_message").text(error.msg);
-                    $("#error_message").css("visibility", "visible");
-                })
-            }
-        })
-        .then(response => {
-            // if (response.role !== undefined | response.role !== null) {
-                console.log(`${response.role}`,response);
-                localStorage.setItem("access_token", `${response.access_token}`);
-                sessionStorage.setItem("username", `${response.username}`);
-                sessionStorage.setItem("email", `${response.email}`);
-                if (response.role !== null) {
-                    sessionStorage.setItem("role", `${response.role}`);
-                    sessionStorage.setItem('exp', `${response.expire}`);
-                }
-                if (localStorage.getItem("access_token") !== null) {
-                    window.location.href= "/dashboard";
+            .then(response => {
+                if (response.status === 200) {
+                    return response.json();
                 }
                 else {
-                    throw new Error("Unexpected response format");
+                    // throw new Error("User Not Found or Invalid Credentials");
+                    response.json().then(error => {
+                        $("#error_message").text(error.msg);
+                        $("#error_message").css("visibility", "visible");
+                    })
                 }
-            // }   
-            // else {
-            //     $("#error_message").text("Wrong Credentails");
-            //     $("#error_message").css("visibility", "visible");
-            // }
-        })
-        .catch(error => {
-            console.log(error);
-            $("#error_message").text(error.msg);
-            $("#error_message").css("visibility", "visible");
-        })
-} else {
-    $("#error_message").text("Please Check Captcha");
-    $("#error_message").css("visibility", "visible");
+            })
+            .then(response => {
+                if (response.role !== undefined | response.role !== null) {
+                    console.log(`${response.role}`, response);
+                    localStorage.setItem("access_token", `${response.access_token}`);
+                    sessionStorage.setItem("username", `${response.username}`);
+                    sessionStorage.setItem("email", `${response.email}`);
+                    if (response.role !== null) {
+                        sessionStorage.setItem("role", `${response.role}`);
+                        sessionStorage.setItem('exp', `${response.expire}`);
+                    }
+                    if (localStorage.getItem("access_token") !== null) {
+                        window.location.href = "/dashboard";
+                    }
+                    else {
+                        throw new Error("Unexpected response format");
+                    }
+                }
+                else {
+                    $("#error_message").text("Wrong Credentails");
+                    $("#error_message").css("visibility", "visible");
+                }
+            })
+            .catch(error => {
+                console.log(error);
+                $("#error_message").text(error.msg);
+                $("#error_message").css("visibility", "visible");
+            })
+    } else {
+        $("#error_message").text("Please Check Captcha");
+        $("#error_message").css("visibility", "visible");
+    }
+    document.getElementById('email').addEventListener('click', function (event) {
+        $("#error_message").css("visibility", "hidden");
+    });
 }
-document.getElementById('email').addEventListener('click', function(event)  {
-    $("#error_message").css("visibility", "hidden");
 });
+
+// fetch api for register
+document.getElementById('register_submit').addEventListener('click', function (event) {
+    // Prevent the default action (navigation to the specified URL)
+    console.log($("#username").val())
+    console.log($("#register-email").val())
+    const formData = new FormData(document.getElementById("register_form"));
+    formData.append("username", $("#username").val());
+    formData.append("email", $("#register-email").val());
+    formData.append("new_password", $("#new_password").val());
+    formData.append("confirm_password", $("#confirm_password").val());
+    if (formData.get('confirm_password') !== "") {
+        event.preventDefault();
+        fetch("/register", {
+            method: "POST",
+            body: formData
+        })
+            .then(response => {
+                if (response.status === 200) {
+                    return response.json();
+                }
+                else {
+                    // throw new Error("User Not Found or Invalid Credentials");
+                    response.json().then(error => {
+                        console.log(error);
+                        $("#register_error_msg").text(error.msg);
+                        $("#register_error_msg").css("visibility", "visible");
+                    })
+                }
+            })
+            .then(response => {
+                console.log(response);
+                $("#register_msg").text(response.success_msg);
+                $("#register_msg").css("visibility", "visible");
+                setTimeout(() => {
+                    window.location.href = '/login';
+                }, 2000);
+            })
+            .catch(error => {
+                console.log(error);
+            })
+        document.getElementById('register-email').addEventListener('click', function (event) {
+            $("#register_error_msg").css("visibility", "hidden");
+        });
+    }
 });

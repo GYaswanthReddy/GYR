@@ -20,9 +20,13 @@ def shipment(request: Request, current_user :str = Depends(get_current_user)):
         #condition to check current_user has any value
         if current_user:
             print("token in shipment", current_user)
+            if current_user["role"] == "admin":
+                shipment_data = list(SHIPMENT.find({}, {"_id":0}))
+                return JSONResponse(content=(shipment_data), status_code=200)
+            else:
             #Filtering the shipment data using email to display the shipment data
-            shipment_data = list(SHIPMENT.find({"email" : current_user["email"]}, {"_id":0, "email" : 0}))
-            return JSONResponse(content=(shipment_data), status_code=200)
+                shipment_data = list(SHIPMENT.find({"email" : current_user["email"]}, {"_id":0}))
+                return JSONResponse(content=(shipment_data), status_code=200)
         return JSONResponse(content={"message" : "Token is None"}, status_code=401)
     except Exception:
         return JSONResponse(content={"message" : "Token was not found"}, status_code=401)

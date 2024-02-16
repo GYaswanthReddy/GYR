@@ -21,16 +21,6 @@ pwd_encode = CryptContext(schemes=["bcrypt"], deprecated = "auto")
 
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl = 'login')
 
-#Token pydantic models
-class Token(BaseModel):
-    access_token : str
-    token_type : str
-
-
-#User pydantic models
-class User(BaseModel):
-    email : str
-    username : str
 
 #Function to verify hash_password in database to plain password in the form
 def verify_password(password, hash_password):
