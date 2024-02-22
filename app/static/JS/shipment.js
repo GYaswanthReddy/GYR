@@ -4,15 +4,15 @@ if(sessionStorage.getItem("username") == null)
   window.location.href = "/login";
 }
  // session timeout checking
- $(document).ready(function(){
- const expireTime = new Date(sessionStorage.getItem('exp'));
- const newTime = new Date().toLocaleTimeString('en-US', {hour12: true, timeZone: 'UTC'});
-  console.log(expireTime.toLocaleTimeString(),"hi",newTime );
-  if (expireTime.toLocaleTimeString() < newTime) {
-    alert("Session Timeout! Please Login Again");
-    logout();
-  }
-});
+//  $(document).ready(function(){
+//  const expireTime = new Date(sessionStorage.getItem('exp'));
+//  const newTime = new Date().toLocaleTimeString('en-US', {hour12: true, timeZone: 'UTC'});
+//   console.log(expireTime.toLocaleTimeString(),"hi",newTime );
+//   if (expireTime.toLocaleTimeString() < newTime) {
+//     alert("Session Timeout! Please Login Again");
+//     logout();
+//   }
+// });
 // jwt retrieval
 $(document).ready(function(){
   const token = localStorage.getItem("access_token");

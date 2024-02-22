@@ -14,14 +14,14 @@ $(document).ready(function () {
 // display error msg for users
 $(document).ready(function () {
   // session timeout checking
-  const expireTime = new Date(sessionStorage.getItem('exp'));
-  const newTime = new Date().toLocaleTimeString('en-US', {hour12: true, timeZone: 'UTC'});
-  console.log(expireTime.toLocaleTimeString(),"hi",newTime );
-  if (expireTime.toLocaleTimeString() < newTime) {
-    alert("Session Timeout! Please Login Again");
-    logout();
-  }
-  else if (sessionStorage.getItem("role") === "user") {
+  // const expireTime = new Date(sessionStorage.getItem('exp'));
+  // const newTime = new Date().toLocaleTimeString('en-US', {hour12: true, timeZone: 'UTC'});
+  // console.log(expireTime.toLocaleTimeString(),"hi",newTime );
+  // if (expireTime.toLocaleTimeString() < newTime) {
+  //   alert("Session Timeout! Please Login Again");
+  //   logout();
+  // }
+  if (sessionStorage.getItem("role") === "user") {
     $("#detail").css("visibility", "hidden");
     $("#user_manage").css("visibility", "hidden");
     $("#admin").css("visibility", "visible");

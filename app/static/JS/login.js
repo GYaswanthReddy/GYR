@@ -143,6 +143,9 @@ document.getElementById('register_submit').addEventListener('click', function (e
                         console.log(error);
                         $("#register_error_msg").text(error.msg);
                         $("#register_error_msg").css("visibility", "visible");
+                        setTimeout(() => {
+                            $("#register_error_msg").css("visibility", "hidden");
+                        }, 4000);
                     })
                 }
             })

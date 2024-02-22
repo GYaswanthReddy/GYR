@@ -61,7 +61,7 @@ def newshipment(request: Request, newshipment: NewShipment | None = None, author
                     SHIPMENT.insert_one(shipment_details)
                     return JSONResponse(content={"message": "Shipment Created"}, status_code=200)
                 return  JSONResponse(content={"message": "Shipment number cannot exceed 7 digits"}, status_code=401)
-            
+            return  JSONResponse(content={"message": "Fileds are missings"}, status_code=401)
         #error msg if any fields are empty or not.
         return  JSONResponse(content={"message": "Please Enter the fields"}, status_code=401)
     except Exception:

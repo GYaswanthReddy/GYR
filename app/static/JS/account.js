@@ -8,13 +8,13 @@ $(document).ready(function () {
   $("#username").text(`Username : ${sessionStorage.getItem("username").charAt(0).toUpperCase() + sessionStorage.getItem("username").slice(1)}`);
   $("#email").text(`Email : ${sessionStorage.getItem("email")}`);
   $("#role").text(`User : ${sessionStorage.getItem("role").charAt(0).toUpperCase() + sessionStorage.getItem("role").slice(1)}`);
-  const expireTime = new Date(sessionStorage.getItem('exp'));
-  const newTime = new Date().toLocaleTimeString('en-US', {hour12: true, timeZone: 'UTC'});
-  console.log(expireTime.toLocaleTimeString(),"hi",newTime );
-  if (expireTime.toLocaleTimeString() < newTime) {
-    alert("Session Timeout! Please Login Again");
-    logout();
-  }
+  // const expireTime = new Date(sessionStorage.getItem('exp'));
+  // const newTime = new Date().toLocaleTimeString('en-US', {hour12: true, timeZone: 'UTC'});
+  // console.log(expireTime.toLocaleTimeString(),"hi",newTime );
+  // if (expireTime.toLocaleTimeString() < newTime) {
+  //   alert("Session Timeout! Please Login Again");
+  //   logout();
+  // }
 });
 
 // jwt token

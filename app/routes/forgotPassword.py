@@ -33,5 +33,6 @@ def forgotpassword(request: Request, email: str=Form(), new_password: str = Form
             #change the user password in database by hashing it using passlib bcrypt module
             REGISTER_COL.update_one({"email": email},{"$set" : {"password" : pwd_encode.hash(new_password)}})
             return templates.TemplateResponse(forgot, {"request": request, "msg" : "Password Successfully changed! Please Login"})
+        return templates.TemplateResponse(forgot, {"request": request, "msg" : "New password and confirm password are not matching"})
     return templates.TemplateResponse(forgot, {"request": request, "msg" : "User Not Found"})
 

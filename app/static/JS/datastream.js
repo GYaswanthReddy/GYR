@@ -6,14 +6,14 @@ if(sessionStorage.getItem("username") == null)
 
 // checking for username in session and checking for session timeout
 $(document).ready(function() {
-  const expireTime = new Date(sessionStorage.getItem('exp'));
-  const newTime = new Date().toLocaleTimeString('en-US', {hour12: true, timeZone: 'UTC'});
-  console.log(expireTime.toLocaleTimeString(),"hi",newTime );
-  if (expireTime.toLocaleTimeString() < newTime) {
-    alert("Session Timeout! Please Login Again");
-    logout();
-  }
-  else if (sessionStorage.getItem("role") === "admin") {
+  // const expireTime = new Date(sessionStorage.getItem('exp'));
+  // const newTime = new Date().toLocaleTimeString('en-US', {hour12: true, timeZone: 'UTC'});
+  // console.log(expireTime.toLocaleTimeString(),"hi",newTime );
+  // if (expireTime.toLocaleTimeString() < newTime) {
+  //   alert("Session Timeout! Please Login Again");
+  //   logout();
+  // }
+  if (sessionStorage.getItem("role") === "admin") {
     $("#admin").css("visibility", "hidden");
     $("#detail").css("visibility", "visible");
     $("#user_manage").css("visibility", "visible");

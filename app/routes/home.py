@@ -9,6 +9,8 @@ templates = Jinja2Templates(directory='templates')
 
 route.mount("/static", StaticFiles(directory = "static"), name = "static")
 
+contactus = "contactus.html"
+
 # Route to render home html page
 @route.get("/")
 def home(request: Request): 
@@ -18,11 +20,11 @@ def home(request: Request):
 # Route to render contact html page
 @route.get("/contactus")
 def contact(request:Request):
-    return templates.TemplateResponse("contactus.html", {"request" : request})
+    return templates.TemplateResponse(contactus, {"request" : request})
 
 @route.post("/contactus")
 def contact(request:Request, name:str=Form(), email:str=Form(), msg:str=Form()):
     print(name,email,msg)
     if name and email and msg:
-        return templates.TemplateResponse("contactus.html", {"request" : request, "message" : "Successfully Submitted the request"})
-    return templates.TemplateResponse("contactus.html", {"request" : request})
+        return templates.TemplateResponse(contactus, {"request" : request, "message" : "Successfully Submitted the request"})
+    return templates.TemplateResponse(contactus, {"request" : request})

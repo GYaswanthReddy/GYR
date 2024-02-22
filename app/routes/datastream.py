@@ -21,7 +21,7 @@ oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token")
 def datastream(request: Request):
     return templates.TemplateResponse("datastream.html", {"request":request})
 
-
+# route to handle the datastream data
 @route.post('/datastream')
 def datastream(request: Request, device : int = Form()  , token : str = Depends(get_current_user)):
     print(device)
