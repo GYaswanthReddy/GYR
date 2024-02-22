@@ -7,7 +7,7 @@ from fastapi.security import OAuth2PasswordBearer,OAuth2PasswordRequestForm
 from fastapi.responses import JSONResponse
 
 route = APIRouter()
-
+# 
 oauth2_schema = OAuth2PasswordBearer(tokenUrl="token")
 
 templates = Jinja2Templates(directory='templates')
