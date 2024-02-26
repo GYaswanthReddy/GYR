@@ -3,7 +3,8 @@ from pydantic import BaseModel
 from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
 import datetime
 from jose import jwt
-from fastapi import Depends
+from jose.exceptions import ExpiredSignatureError
+from fastapi import Depends,HTTPException
 from config.config import REGISTER_COL
 
 
@@ -62,21 +63,24 @@ def create_access_token(user_data : dict):
 
 #Fucntion to decode the jwt token 
 def get_current_user(token: str = Depends(oauth2_scheme)):
-    #print(token,"get_user")
-    if not token:
-        return False
-    #print(token,"im in get_current_user")
+    try:
+        #print(token,"get_user")
+        if not token:
+            return False
+        #print(token,"im in get_current_user")
 
-    #Decoding jwt token
-    payload = jwt.decode(token, secret_key, algorithms=[algorithm])
+        #Decoding jwt token
+        payload = jwt.decode(token, secret_key, algorithms=[algorithm])
 
-    #Saving the email in JWT token
-    email = payload.get('sub')
-    #print(email,"im in get_current")
+        #Saving the email in JWT token
+        email = payload.get('sub')
+        #print(email,"im in get_current")
 
-    #get user by email
-    user = get_user(email)
-    #print(user, "im in get_current")
-    if user:
-        return user
-    return None
+        #get user by email
+        user = get_user(email)
+        #print(user, "im in get_current")
+        if user:
+            return user
+        return None
+    except ExpiredSignatureError as error:
+        raise HTTPException(status_code=500, detail="Token has expired")

@@ -19,14 +19,6 @@ $(document).ready(function () {
 
 // jwt token retrieval
 document.addEventListener("DOMContentLoaded", function () {
-  // Session timeout checking
-  // const expireTime = new Date(sessionStorage.getItem('exp'));
-  // const newTime = new Date().toLocaleTimeString('en-US', {hour12: true, timeZone: 'UTC'});
-  // console.log(expireTime.toLocaleTimeString(),"hi",newTime );
-  // if (expireTime.toLocaleTimeString() < newTime) {
-  //   alert("Session Timeout! Please Login Again");
-  //   logout();
-  // }
   document.getElementById("submit-form").addEventListener("click", function (event) {
     event.preventDefault();
     console.log("Dom load");
@@ -57,8 +49,14 @@ document.addEventListener("DOMContentLoaded", function () {
         }
         else {
           response.json().then(response => {
-            $("#msg").text(response.message);
-            $("#msg").css("visibility", "visible");
+            console.log(response)
+            if (response.hasOwnProperty("detail") && response.detail === "Token has expired") {
+              alert("Session has expired! Please login again.");
+              logout()
+            } else {
+              $("#msg").text(response.message);
+              $("#msg").css("visibility", "visible");
+            }
           });
         }
       })
@@ -71,7 +69,7 @@ document.addEventListener("DOMContentLoaded", function () {
           $("#msg").css("visibility", "visible");
           setTimeout(() => {
             window.location.href = '/newshipment';
-          },2000);
+          }, 2000);
         } else {
           throw new Error("Unexpected response format");
         }

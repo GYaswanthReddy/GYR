@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Request,Form,Depends
+from fastapi import APIRouter, Request,Form,Depends,HTTPException
 from fastapi.templating import Jinja2Templates
 from fastapi.responses import JSONResponse
 from fastapi.staticfiles import StaticFiles
@@ -34,6 +34,8 @@ def datastream(request: Request, device : int = Form()  , token : str = Depends(
                 return JSONResponse(content={'device' : data}, status_code=200)
             return JSONResponse(content={"message" : "No Id selected"}, status_code=401)
         return JSONResponse(content={"message" : "Requires Admin Privileges"}, status_code=401)
+    except HTTPException as e:
+        return JSONResponse(content={"message": str(e.detail)}, status_code=e.status_code)
     except Exception:
         return JSONResponse(content={"message" : "Server is busy"}, status_code=401)
 
@@ -63,6 +65,8 @@ def user(request:Request, email:str = Form(), role : str = Form(), token:str = D
                 return JSONResponse(content={"message" : "The user is admin"}, status_code=401)
             return JSONResponse(content={"message" : "No admin found"}, status_code=401)
         return JSONResponse(content={"message" : "User Not found"}, status_code=401)
+    except HTTPException as e:
+        return JSONResponse(content={"message": str(e.detail)}, status_code=e.status_code)
     except Exception:
         return JSONResponse(content={"message" : "Token Not Found"}, status_code=401)
         

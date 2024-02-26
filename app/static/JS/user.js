@@ -13,14 +13,6 @@ $(document).ready(function () {
 
 // display error msg for users
 $(document).ready(function () {
-  // session timeout checking
-  // const expireTime = new Date(sessionStorage.getItem('exp'));
-  // const newTime = new Date().toLocaleTimeString('en-US', {hour12: true, timeZone: 'UTC'});
-  // console.log(expireTime.toLocaleTimeString(),"hi",newTime );
-  // if (expireTime.toLocaleTimeString() < newTime) {
-  //   alert("Session Timeout! Please Login Again");
-  //   logout();
-  // }
   if (sessionStorage.getItem("role") === "user") {
     $("#detail").css("visibility", "hidden");
     $("#user_manage").css("visibility", "hidden");
@@ -43,21 +35,19 @@ document.addEventListener('DOMContentLoaded', function () {
       },
       body: formData
     }).then(response => {
-      if (response.status === 200) {
-        return response.json();
-      }
-      else {
-        return response.json().then(error => {
-          throw new Error(error.message);
-        });
-      }
+      return response.json();
     }).then(response => {
-      console.log(response);
-      $("#msg").text(response.message);
-      $("#msg").css("visibility", "visible");
-      setTimeout(() => {
-        window.location.href = '/usermanagement';
-      },2000);
+      if (response.hasOwnProperty("detail") && response.detail === "Token has expired") {
+        alert("Session has expired! Please login again.");
+        logout()
+      } else {
+        console.log(response);
+        $("#msg").text(response.message);
+        $("#msg").css("visibility", "visible");
+        setTimeout(() => {
+          window.location.href = '/usermanagement';
+        }, 2000);
+      }
     })
       .catch(error => {
         $("#msg").text(error.message);

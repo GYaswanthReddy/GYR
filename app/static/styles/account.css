@@ -276,7 +276,9 @@ body.minimized .sidebar ul li .icon {
     background: #0082e6;
     color: white;
 }
-
+.account .update:hover{
+    cursor: pointer;
+}
 .detail .updatepassword {
     position: fixed;
     background: white;
@@ -304,4 +306,7 @@ body.minimized .sidebar ul li .icon {
 .detail .updatepassword .pass_submit {
     background: #0082e6;
     color: white;
+}
+.detail .updatepassword .pass_submit:hover{
+    cursor: pointer;
 }
