@@ -63,7 +63,6 @@ document.addEventListener("DOMContentLoaded", function () {
       .then(response => {
         // Access and display the message from the response
         if (response.message) {
-          // event.preventDefault();
           console.log(response.message);
           $("#msg").text(response.message);
           $("#msg").css("visibility", "visible");

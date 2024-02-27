@@ -52,7 +52,7 @@ def create_access_token(user_data : dict):
     encode = user_data.copy()
 
     #creating expire time for JWT token
-    expire = datetime.datetime.utcnow() + datetime.timedelta(minutes = 60)
+    expire = datetime.datetime.utcnow() + datetime.timedelta(minutes=60)
 
     #saving the expire in user_data to encode with jwt token
     encode.update({"exp" : expire})
@@ -82,5 +82,5 @@ def get_current_user(token: str = Depends(oauth2_scheme)):
         if user:
             return user
         return None
-    except ExpiredSignatureError as error:
+    except ExpiredSignatureError:
         raise HTTPException(status_code=500, detail="Token has expired")

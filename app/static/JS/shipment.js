@@ -22,9 +22,7 @@ $(document).ready(function () {
       }
       console.log(typeof response, response);
       let shipment_data = "";
-      for (let shipment_no = 0; shipment_no < response.length; shipment_no++) {
-        const shipment = response[shipment_no];
-
+      for (const shipment of response) {
         shipment_data = shipment_data + "<tr><td>"
           + shipment.email + "</td><td>"
           + shipment.shipment_number + "</td><td>"

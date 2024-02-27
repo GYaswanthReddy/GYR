@@ -1,0 +1,6 @@
+projectKey=scmxpert
+serverUrl=http://localhost:9000
+serverVersion=10.4.0.87286
+dashboardUrl=http://localhost:9000/dashboard?id=scmxpert
+ceTaskId=4998ab2e-23fa-4fde-8394-11be782d854c
+ceTaskUrl=http://localhost:9000/api/ce/task?id=4998ab2e-23fa-4fde-8394-11be782d854c

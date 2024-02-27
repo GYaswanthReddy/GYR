@@ -7,7 +7,7 @@ from fastapi.security import OAuth2PasswordBearer,OAuth2PasswordRequestForm
 from fastapi.responses import JSONResponse
 
 route = APIRouter()
-# 
+
 oauth2_schema = OAuth2PasswordBearer(tokenUrl="token")
 
 templates = Jinja2Templates(directory='templates')
@@ -32,10 +32,8 @@ def login(request: Request, form_data : OAuth2PasswordRequestForm = Depends()):
             #Generating JWT token
             access_token = create_access_token(user_data = {"sub": user["email"]})
             
-            token_expire = datetime.datetime.utcnow() + datetime.timedelta(minutes=60)
-            print(token_expire,datetime.datetime.now())
             #return the JWT token, username, email, role to store in localstorage
-            return JSONResponse(content={"access_token": access_token, "username": user["username"], "email": user["email"], "role": user["role"], "expire" : str(token_expire)}, status_code=200)
+            return JSONResponse(content={"access_token": access_token, "username": user["username"], "email": user["email"], "role": user["role"]}, status_code=200)
         return JSONResponse(content=user, status_code=401)
     except Exception:
         #Error msg for invalid credentails

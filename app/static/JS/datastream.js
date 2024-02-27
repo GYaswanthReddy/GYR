@@ -46,14 +46,10 @@ document.addEventListener("DOMContentLoaded", function () {
           logout()
         } else {
           console.log(response.device.length);
-          // console.log(response.device);
 
           let device_data = "";
           console.log(response.device.length);
-          for (var no = 0; no < response.device.length; no++) {
-            console.log(response.device.length);
-            const device_details = response.device[no];
-            console.log(device_details);
+          for (const device_details of response.device) {
             device_data += "<tr><td>"
               + device_details.Device_id + "</td><td>"
               + device_details.Battery_level + "</td><td>"

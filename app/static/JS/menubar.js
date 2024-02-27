@@ -1,8 +1,8 @@
 
 document.addEventListener('DOMContentLoaded', function () {
     function toggleSidebar() {
-      var body = document.querySelector('body');
-      var sidebar = document.getElementById('sidebar');
+      let body = document.querySelector('body');
+      let sidebar = document.getElementById('sidebar');
   
       // Toggle class to minimize or maximize the layout
       body.classList.toggle('minimized');
@@ -13,9 +13,9 @@ document.addEventListener('DOMContentLoaded', function () {
   
     // Click event listener for the whole document
     document.body.addEventListener('click', function (event) {
-      var sidebar = document.querySelector('.sidebar');
-      var isClickInsideSidebar = sidebar.contains(event.target);
-      var isSidebarMinimized = document.body.classList.contains('minimized');
+      let sidebar = document.querySelector('.sidebar');
+      let isClickInsideSidebar = sidebar.contains(event.target);
+      let isSidebarMinimized = document.body.classList.contains('minimized');
   
       if (!isClickInsideSidebar && !isSidebarMinimized) {
         // Toggle class to minimize the layout

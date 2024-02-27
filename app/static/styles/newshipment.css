@@ -58,7 +58,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 2vw;
+    font-size: 1.2em; 
     min-width: 60px;
 }
 
@@ -114,13 +114,12 @@ body {
     flex-direction: row;
     padding-left: 10px;
     height: 85px;
-    background: white;
     width: 100%;
     background: rgba(255,255,255,0.1);
 }
 
 .body .mainbody .header .menu-icon {
-    font-size: 25px;
+    font-size: 2vw;
     position: relative;
     top: 12px;
 }
@@ -135,14 +134,14 @@ body {
     position: absolute;
     left: 20%;
     top: 15px;
-    font-size: 30px;
+    font-size: 1.5em;
 }
 
 .body .mainbody .header .icon {
     position: absolute;
     right: 25px;
     top: 20px;
-    font-size: 40px;
+    font-size: 2em;
     color: white;
 }
 .body .mainbody .header a:hover,
@@ -162,22 +161,6 @@ body {
     .body .mainbody .header .icon {
         font-size: 4em;
     }
-}
-
-.sidebar ul li .icon {
-    font-size: 1.2em; 
-}
-
-.body .mainbody .header .menu-icon {
-    font-size: 2vw; 
-}
-
-.body .mainbody .header .user-text {
-    font-size: 1.5em; 
-}
-
-.body .mainbody .header .icon {
-    font-size: 2em; 
 }
 
 /* side bar function styles */
