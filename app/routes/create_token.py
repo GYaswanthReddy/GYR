@@ -1,5 +1,4 @@
 from passlib.context import CryptContext
-from pydantic import BaseModel
 from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
 import datetime
 from jose import jwt

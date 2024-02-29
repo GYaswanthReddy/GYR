@@ -5,7 +5,6 @@ from fastapi.staticfiles import StaticFiles
 from config.config import REGISTER_COL
 from routes.create_token import get_current_user
 from passlib.context import CryptContext
-from jose import ExpiredSignatureError
 from fastapi.security import OAuth2PasswordBearer
 
 route = APIRouter()

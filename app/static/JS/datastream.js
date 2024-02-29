@@ -29,7 +29,7 @@ document.addEventListener("DOMContentLoaded", function () {
     console.log("Dom load");
     console.log(document.getElementById('device_id').innerText);
     const formData = new FormData(document.getElementById("device_form"));
-    formData.append('device', $('#device_id').val());
+    formData.append('device_id', $('#device_id').val());
     console.log(formData.get('device_id'), typeof formData.get('device_id'));
     fetch("/datastream", {
       method: "POST",
@@ -41,9 +41,16 @@ document.addEventListener("DOMContentLoaded", function () {
       .then(response => {
         return response.json();
       }).then(response => {
+        console.log(response);
         if (response.hasOwnProperty("detail") && response.detail === "Token has expired") {
           alert("Session has expired! Please login again.");
           logout()
+        } else if (response.hasOwnProperty("message") && response.detail !== "") {
+          $("#msg").text(response.message);
+          $("#msg").css("visibility", "visible");
+          setTimeout(() => {
+            $("#msg").css("visibility", "hidden");
+          }, 2000);
         } else {
           console.log(response.device.length);
 
@@ -62,7 +69,7 @@ document.addEventListener("DOMContentLoaded", function () {
         }
       })
       .catch(error => {
-        $("#msg").text("Please Enter All Fields");
+        $("#msg").text(error);
         $("#msg").css("visibility", "visible");
       })
   });

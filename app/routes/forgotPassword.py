@@ -3,7 +3,6 @@ from fastapi.templating import Jinja2Templates
 from fastapi.staticfiles import StaticFiles
 from config.config import REGISTER_COL
 from routes.create_token import pwd_encode
-from random import randint
 
 
 route = APIRouter()

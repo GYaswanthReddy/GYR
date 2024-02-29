@@ -5,7 +5,6 @@ from fastapi.staticfiles import StaticFiles
 from routes.create_token import get_current_user
 from config.config import SHIPMENT
 from fastapi.security import OAuth2PasswordBearer
-from jose import ExpiredSignatureError
 
 route = APIRouter()
 oauth2_schema = OAuth2PasswordBearer(tokenUrl="token")

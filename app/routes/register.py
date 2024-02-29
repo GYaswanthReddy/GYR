@@ -45,5 +45,7 @@ def register(request: Request, username: str=Form(), email: str=Form(), new_pass
                 return JSONResponse(content={ "msg": "New Password and confirm password must be same"}, status_code=401)
             return JSONResponse(content={ "msg": "Username not found"}, status_code=401)
         return JSONResponse(content={ "msg": "Email already exists"}, status_code=401)
+    except ValueError:
+         return JSONResponse(content={ "msg": "Invalid email format"}, status_code=401)
     except Exception:
         return {"msg" : "Server busy at the moment! Please try again"}

@@ -2,11 +2,9 @@ from fastapi import APIRouter, Header, Request,Depends,HTTPException
 from fastapi.responses import JSONResponse
 from fastapi.templating import Jinja2Templates
 from fastapi.staticfiles import StaticFiles
-from pydantic import BaseModel
 from config.config import SHIPMENT
 from fastapi.security import OAuth2PasswordBearer
 from routes.create_token import get_current_user
-from jose import ExpiredSignatureError
 from models.models import NewShipment
 
 route = APIRouter()
