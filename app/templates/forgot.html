@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forgot Password</title>
+    <link rel="icon" type="image/x-icon" href="/static/images/transport-logistic-manager-engineer-checking-generative-ai-illustration_145713-1316.webp">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #dbdada;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        .forgot-password-form {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            width: 100%;
+            text-align: center;
+            height: auto;
+
+        }
+
+        h2 {
+            color: #3498db;
+        }
+
+        p {
+            margin-bottom: 20px;
+            color: #555;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 16px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+        }
+
+        input[type="submit"] {
+            background-color: #3498db;
+            color: #fff;
+            padding: 10px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #267bb5;
+        }
+
+        a {
+            text-decoration: none;
+            color: #3498db;
+            display: block;
+            margin-top: 10px;
+            font-weight: bolder;
+        }
+
+        .msg {
+            color: #e74c3c;
+  
+        }
+    </style>
+</head>
+<body>
+    <form action="/forgotpassword" method="post" id="forgotPasswordForm">
+        <div class="forgot-password-form">
+            <h2>Forgot Password</h2>
+            <p>Enter your email address to reset your password.</p>
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+
+            <label for="new_password">New Password:</label>
+            <input type="password" id="new_password" name="new_password" required>
+
+            <label for="confirm_password">Confirm Password:</label>
+            <input type="password" id="confirm_password" name="confirm_password" required>
+
+            {% if msg %}
+                <span class="msg">{{ msg }}</span>
+            {% endif %}
+
+            <input type="submit" value="Submit">
+            <a href="/login">Login</a>
+        </div>
+    </form>
+</body>
+</html>

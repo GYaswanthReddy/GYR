@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shipment</title>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="icon" type="image/x-icon" href="/static/images/transport-logistic-manager-engineer-checking-generative-ai-illustration_145713-1316.webp">
+    <link rel="stylesheet" href="/static/styles/shipment.css">
+    <script src="https://code.jquery.com/jquery-3.7.1.slim.js" integrity="sha256-UgvvN8vBkgO0luPSUl2s8TIlOSYRoGFAX4jlCIm9Adc=" crossorigin="anonymous"></script>
+    <script src="/static/JS/menubar.js"></script>
+    <script src="../static/JS/shipment.js"></script>
+</head>
+<body>
+    <div class="body">
+        <div class="container">
+            <div class="top">
+                <div class="img">
+                    <img src="/static/images/scmimg.jpg" alt="">
+                    
+                </div>
+                <div class="title">
+                    <span>SCMXpert</span>
+                </div>
+            </div>
+            <div class="sidebar" id="sidebar">
+                <ul>
+                    <li>
+                        <a href="/dashboard">
+                            <span class="bx bxs-dashboard icon"></span>
+                            <span class="title">Dashboard</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/account">
+                            <span class="bx bx-user-circle icon"></span>
+                            <span class="title">My Account</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/newshipment">
+                            <span class="bx bx-detail icon"></span>
+                            <span class="title">New Shipment</span>
+                        </a>
+                    </li>
+                    <li class="active">
+                        <a href="/shipment">
+                            <span class="bx bxs-truck icon"></span>
+                            <span class="title">My shipment</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/datastream">
+                            <span class="bx bx-data icon"></span>
+                            <span class="title">Device Data</span>
+                        </a>
+                    </li>
+                    <li class="logout">
+                        <a href="/login" onclick="logout()">
+                            <span class="bx bx-log-out icon"></span>
+                            <span class="title">Logout</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="mainbody">
+            <div class="header">
+                <i class="bx bx-menu menu-icon" onclick="toggleSidebar() "></i>
+                <span class="user-text">My Shipment</span>
+                <a href="/account">
+                    <i class="bx bx-user-circle icon"></i>
+                </a>
+            </div>
+            <div class="detail">
+                <div class="table">
+                    <table>
+                        <caption style="display: none;">Shipment details</caption>
+                        <thead>
+                            <tr>
+                                <th>Email</th>
+                                <th>Shipment Number</th>
+                                <th>Container Number</th>
+                                <th>Route Details</th>
+                                <th>Goods Type</th>
+                                <th>Device</th>
+                                <th>Expected Delivery Date</th>
+                                <th>PO Number</th>
+                                <th>Delivery Number</th>
+                                <th>NDC Number</th>
+                                <th>Batch Id</th>
+                                <th>Serial number of Goods</th>
+                                <th>Shipment Description</th>
+                            </tr>
+                        </thead>
+                        <tbody id="table_data">
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NewShipment</title>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="icon" type="image/x-icon" href="/static/images/transport-logistic-manager-engineer-checking-generative-ai-illustration_145713-1316.webp">
+    <link rel="stylesheet" href="/static/styles/newshipment.css">
+    <script src="https://code.jquery.com/jquery-3.7.1.slim.js" integrity="sha256-UgvvN8vBkgO0luPSUl2s8TIlOSYRoGFAX4jlCIm9Adc=" crossorigin="anonymous"></script>
+    <script src="/static/JS/menubar.js"></script>
+    <script src="../static/JS/newshipment.js"></script>
+</head>
+
+<body>
+    <div class="body">
+        <div class="container">
+            <div class="top">
+                <div class="img">
+                    <img src="/static/images/scmimg.jpg" alt="">
+
+                </div>
+                <div class="title">
+                    <span>SCMXpert</span>
+                </div>
+            </div>
+            <div class="sidebar" id="sidebar">
+                <ul>
+                    <li>
+                        <a href="/dashboard">
+                            <span class="bx bxs-dashboard icon"></span>
+                            <span class="title">Dashboard</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/account">
+                            <span class="bx bx-user-circle icon"></span>
+                            <span class="title">My Account</span>
+                        </a>
+                    </li>
+                    <li class="active">
+                        <a href="/newshipment">
+                            <span class="bx bx-detail icon"></span>
+                            <span class="title">New Shipment</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/shipment">
+                            <span class="bx bxs-truck icon"></span>
+                            <span class="title">My shipment</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/datastream">
+                            <span class="bx bx-data icon"></span>
+                            <span class="title">Device Data</span>
+                        </a>
+                    </li>
+                    <li class="logout">
+                        <a href="/login" onclick="logout()">
+                            <span class="bx bx-log-out icon"></span>
+                            <span class="title">Logout</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="mainbody">
+            <div class="header">
+                <i class="bx bx-menu menu-icon" onclick="toggleSidebar() "></i>
+                <span class="user-text">New Shipment</span>
+                <a href="/account">
+                    <i class="bx bx-user-circle icon"></i>
+                </a>
+            </div>
+                <div class="detail">
+                    <div class="form">
+                        <span id="msg"></span>
+                        <form autocomplete="on">
+                            <div class="div1">
+                                <div class="left">
+                                    <label for="shipment_number">Shipment Number<i class="danger-text" style="color: red;">*</i></label><br>
+                                    <input type="number" name="shipment_number" id="shipment_number" placeholder="Shipment Number" required>
+                                </div>
+                                <div class="right">
+                                    <label for="container_number">Container Number<i class="danger-text" style="color: red;">*</i></label><br>
+                                    <input type="number" name="container_number" id="container_number" placeholder="Container Number" required>
+                                </div>
+                            </div>
+                            <div class="div2">
+                                <div class="left">
+                                    <label for="route_details">Route Details<i class="danger-text" style="color: red;">*</i></label><br>
+                                    <select name="route_details" id="route_details" required>
+                                        <option value="" disabled selected>Select route</option>
+                                        <option value="Chittoor-Tirupati">Chittoor-Tirupati</option>
+                                        <option value="Nellore-Chittor">Nellore-Chittor</option>
+                                        <option value="Vizag-Hyd">Vizag-Hyd</option>
+                                        <option value="Delhi-Mumbai">Delhi-Mumbai</option>
+                                    </select>
+                                </div>
+                                <div class="right">
+                                    <label for="goods_type">Goods Type<i class="danger-text" style="color: red;">*</i></label><br>
+                                    <select name="goods_type" id="goods_type" required>
+                                        <option value="" disabled selected>Select goods</option>
+                                        <option value="Fragile">Fragile</option>
+                                        <option value="Medical">Medical</option>
+                                        <option value="Hardware">Hardware</option>
+                                        <option value="Food">Food</option>
+                                    </select>
+                                </div>
+                            </div> 
+                            <div class="div3">
+                                <div class="left">
+                                    <label for="device">Device<i class="danger-text" style="color: red;">*</i></label><br>
+                                    <select name="device" id="device" required>
+                                        <option value="" disabled selected>Select Device</option>
+                                        <option value="1234567890">1234567890</option>
+                                        <option value="1234567891">1234567891</option>
+                                    </select>
+                                </div>
+                                <div class="right">
+                                    <label for="delivery_date">Expected Delivery Date<i class="danger-text" style="color: red;">*</i></label><br>
+                                    <input type="date" name="delivery_date" id="delivery_date" required>
+                                </div>
+                            </div>
+                            <div class="div4">
+                                <div class="left">
+                                    <label for="po_number">PO Number<i class="danger-text" style="color: red;">*</i></label><br>
+                                    <input type="number" name="po_number" id="po_number" placeholder="PO number" required>
+                                </div>
+                                <div class="right">
+                                    <label for="delivery_number">Delivery Number<i class="danger-text" style="color: red;">*</i></label><br>
+                                    <input type="number" name="delivery_number" id="delivery_number" placeholder="Delivery number" required>
+                                </div>
+                            </div>
+                            <div class="div5">
+                                <div class="left">
+                                    <label for="ndc_number">NDC Number<i class="danger-text" style="color: red;">*</i></label><br>
+                                    <input type="number" name="ndc_number" id="ndc_number" placeholder="NDC number" required>
+                                </div>
+                                <div class="right">
+                                    <label for="batch_id">Batch Id<i class="danger-text" style="color: red;">*</i></label><br>
+                                    <input type="number" name="batch_id" id="batch_id" placeholder="Batch id" required>
+                                </div>
+                            </div>
+                            <div class="div6">
+                                <div class="left">
+                                    <label for="serial_number">Serial number of Goods<i class="danger-text" style="color: red;">*</i></label><br>
+                                    <input type="number" name="serial_number" id="serial_number" placeholder="Serial number of goods" required>
+                                </div>
+                                <div class="right">
+                                    <label for="shipment_description">shipment Description<i class="danger-text" style="color: red;">*</i></label><br>
+                                    <textarea name="shipment_description" id="shipment_description" placeholder="Shipment Description" required rows="4" cols="50" style="border-radius: 10px; padding: 13px 0 0 13px;"></textarea>
+                                </div>
+                            </div>
+                            <input type="reset" name="Clear" id="Clear" value="Clear" class="clear">
+                            <input type="submit"  value="Submit" class="submit" id="submit-form">
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

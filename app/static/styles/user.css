@@ -1,0 +1,371 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital@1&display=swap');
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    list-style: none;
+    text-decoration: none;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background: url(/static/images/wp9448982.jpg);
+    background-size:cover;
+    backdrop-filter: blur(3px);
+}
+/* Side bar Styles */
+.body {
+    display: flex;
+    flex-direction: row;
+}
+
+.container {
+    background: rgba(255, 255, 255, 0.1);
+    min-width: 80px; 
+    width: 19%; 
+    height: 100vh;
+    border-left: 10px solid rgba(255, 255, 255, 0.2);
+    border-radius: 5px;
+    backdrop-filter: blur(2px);
+}
+
+.container .top {
+    display: flex;
+    align-items: center;
+    margin-bottom: 50px;
+}
+
+.container .top .img img{
+    width: 60px;
+    display: flex;
+    border-radius: 50px;
+}
+.container .top .title {
+    font-size: 25px;
+    color: white;
+}
+
+.sidebar ul li {
+    width: 100%;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.sidebar ul li .icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2em; 
+    min-width: 60px;
+}
+
+.sidebar ul li .icon,
+.sidebar ul li .title {
+    color: rgb(255, 255, 255);
+}
+
+.sidebar ul li a {
+    height: 100%;
+    width: 100%;
+    padding-left: 10px;
+    display: flex;
+    align-items: center;
+    border-radius: 30px;
+    transition: background-color 0.2s ease, transform 0.4s ease;
+}
+
+.sidebar ul li a:hover {
+    background-color: rgb(255, 255, 255);
+    transform: scale(1.2);
+    transition: background-color 0.2s ease, transform 0.4s ease;
+}
+
+.sidebar ul li a:hover .icon,
+.sidebar ul li a:hover .title {
+    color: rgb(2, 103, 255);
+}
+
+.sidebar .logout {
+    position: relative;
+    top: 310px;
+}
+
+.sidebar .logout .icon,
+.sidebar .logout .title {
+    color: red;
+}
+
+/* Header styles */
+
+.body .mainbody {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    height: 100vh;
+    width: 100%;
+}
+
+.body .mainbody .header {
+    display: flex;
+    flex-direction: row;
+    padding-left: 10px;
+    height: 85px;
+    background: rgba(255, 255, 255, 0.1);
+    width: 100%;
+    color: white;
+}
+
+.body .mainbody .header .menu-icon {
+    font-size: 2vw; 
+    position: relative;
+    top: 12px;
+}
+
+.body .mainbody .header .menu-icon:hover {
+    cursor: pointer;
+    transform: scale(1.2);
+    transition: background-color 0.2s ease, transform 0.4s ease;
+}
+
+.body .mainbody .header .user-text {
+    position: absolute;
+    left: 25%;
+    top: 20px;
+    font-size: 1.5em;
+}
+
+.body .mainbody .header .icon {
+    position: absolute;
+    right: 25px;
+    top: 22px;
+    font-size: 2rem;
+    color: white;
+}
+.body .mainbody .header a:hover,
+.body .mainbody .header .menu:hover {
+    cursor: pointer;
+}
+@media only screen and (max-width: 600px) {
+    .body .mainbody .header .menu-icon {
+        font-size: 4em;
+    }
+
+    .body .mainbody .header .user-text {
+        left: 10%;
+        font-size: 2.5em;
+    }
+
+    .body .mainbody .header .icon {
+        font-size: 4em;
+    }
+}
+
+/* side bar function styles */
+
+.sidebar ul li.active {
+    background-color: rgb(255, 255, 255);
+    border-radius: 30px;
+}
+.sidebar ul li.active a .icon,
+.sidebar ul li.active a .title {
+    color: rgb(2, 103, 255);
+}
+
+body .container,
+body .mainbody,
+body .header .menu {
+    transition: all 0.5s ease;
+}
+
+body.minimized .container {
+    width: 80px;
+}
+
+body.minimized .mainbody {
+    margin-left:0; 
+}
+
+body.minimized .header .menu {
+    left: 80px; 
+}
+
+body.minimized .sidebar ul li {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+
+body.minimized .sidebar ul li .title,
+body.minimized .top .title {
+    display: none;
+}
+
+body.minimized .sidebar ul li:hover .title {
+    display: block;
+    font-size: 12px;
+}
+
+body.minimized .sidebar ul li a {
+    justify-content: center;
+    justify-content: flex-start;
+}
+
+body.minimized .sidebar ul li .icon {
+    margin-right: 10px; 
+}
+
+.detail {
+    position: fixed;
+    width: 900px;
+    height: 700px;
+    top: 15%;
+    left: 30%;
+}
+
+.detail .top {
+    position: absolute;
+    top: 20px;
+    width: 100%;
+    height: 170px;
+    text-align: center;
+    color: white;
+}
+
+.detail .top .device-search {
+    position: fixed;
+    left: 33%;
+    top: 25%;
+}
+
+.device-search label {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.device-search select {
+    width: 350px;
+    height: 40px;
+    border-radius: 5px;
+    padding: 10px;
+}
+
+.top input[type=submit] {
+    position: fixed;
+    top: 28%;
+    left: 63%;
+    width: 180px;
+    height: 40px;
+    border-radius: 10px;
+    background: #0537f9;
+    color: white;
+    border: 1px solid;
+}
+
+.top input[type=submit]:hover, .device-search select:hover {
+    cursor: pointer;
+}
+
+.bottom {
+    position: absolute;
+    top: 35%;
+    left: 1%;
+    background: white;
+    width: 900px;
+    height: 500px;
+    overflow-y: auto;
+    border-radius: 10px;
+}
+
+table {
+    padding: 20px;
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th {
+    background-color:#6759c2;
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    color: white;
+}
+th, td {
+    padding: 20px 15px;
+    text-align: center;
+}
+
+tr {
+    border-bottom: 1px solid #dddddd;
+    border-collapse: collapse;
+}
+
+tr:hover{ 
+    
+    background: #f3f3f3;
+    transform: scale(1.02);
+    transition: transform 0.2s ease, scale 0.2s ease;
+}
+
+tr:nth-of-type(even) {
+    background-color: #dad7d7;
+}
+ tr:last-of-type {
+    border-bottom: 1px solid rgba(0,89,175,255);
+}
+
+.admin {
+    position: absolute;
+    text-align: center;
+    top:40%;
+    left: 40%;
+    font-size: 40px;
+    color: white;
+
+}
+
+.form {
+    position: absolute;
+    top: 25%;
+    left: 35%;
+    width: 500px;
+    height: 300px;
+    background:white;
+    padding: 35px 25px 15px 40px;
+    border-radius: 20px;
+}
+
+label {
+    font-size: 15px;
+    color: rgb(5, 0, 5);
+    font-weight: bolder;
+}
+
+input, select {
+    font-size: 15px;
+    width: 400px;
+    height: 40px;
+    margin-bottom: 25px;
+    border-radius: 10px;
+    padding: 0 20px 0 20px;
+    border: 1px solid rgb(190, 189, 189);
+}
+#submit {
+    margin-top: 30px;
+    position: absolute;
+    width: 120px;
+    height: 35px;
+    border: 1px solid rgb(190, 189, 189);
+    border-radius: 20px;
+    background: #0082e6;
+    color: white;
+    left: 35%;
+}
+
+#msg{
+    position: absolute;
+    color: green;
+    left: 170px;
+}
